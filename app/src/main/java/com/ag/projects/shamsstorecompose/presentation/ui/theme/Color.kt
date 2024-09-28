@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.ui.theme
+package com.ag.projects.shamsstorecompose.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
