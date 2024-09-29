@@ -105,17 +105,22 @@ fun CommonHeader(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            IconButton(
-                onClick = onBackClick,
-                modifier = Modifier.size(30.dp)
-            ) {
-                iconBack?.let {
-                    Icon(
-                        imageVector = it,
-                        contentDescription = stringResource(id = R.string.back)
-                    )
+            if (iconBack == null){
+                Text(text = "Location")
+            }else{
+                IconButton(
+                    onClick = onBackClick,
+                    modifier = Modifier.size(30.dp)
+                ) {
+                    iconBack?.let {
+                        Icon(
+                            imageVector = it,
+                            contentDescription = stringResource(id = R.string.back)
+                        )
+                    }
                 }
             }
+
 
             Text(
                 text = screenName,
