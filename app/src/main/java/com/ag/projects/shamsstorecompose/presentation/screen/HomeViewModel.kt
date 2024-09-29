@@ -1,6 +1,5 @@
 package com.ag.projects.shamsstorecompose.presentation.screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ag.projects.domain.model.ProductsResponse
@@ -21,7 +20,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _allProducts =
-        MutableStateFlow<com.ag.projects.shamsstorecompose.utils.Result<ProductsResponse>>(Result.Loading)
+        MutableStateFlow<Result<ProductsResponse>>(Result.Loading)
     val allProducts = _allProducts.asStateFlow()
 
     init {

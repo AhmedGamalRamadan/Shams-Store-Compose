@@ -2,6 +2,7 @@
     <string name="app_name">ShamsStoreCompose</string>
 
     <string name="search_products">Search Products</string>
+    <string name="search">Search....</string>
     <string name="location_name">King Abduallah,45</string>
     <string name="Change">Change</string>
     <string name="home">home</string>
@@ -36,6 +37,7 @@
     <string name="which_list">Which List</string>
     <string name="orders">Orders</string>
     <string name="notifications">Notifications</string>
+    <string name="logo">Logo</string>
     <string name="payment_methods">Payment Methods</string>
     <string name="language">Language</string>
     <string name="settings">Settings</string>
