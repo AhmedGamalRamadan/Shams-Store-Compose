@@ -10,27 +10,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ag.projects.shamsstorecompose.R
@@ -45,42 +42,38 @@ fun CommonHeader(
     editTextValue: String,
     onValueChange: (String) -> Unit,
     screenName: String,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    iconBack: ImageVector? = null,
+    changeLocation: String = ""
 ) {
-
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(Blue)
     ) {
-
         Row(
-            modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(17.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-
             Icon(
                 painter = painterResource(id = R.drawable.ic_notification),
                 contentDescription = stringResource(id = R.string.notifications),
-                modifier = modifier
-                    .width(60.dp)
-                    .height(60.dp),
+                modifier = modifier.size(40.dp),
                 tint = Color.White
-
             )
-            Spacer(modifier = Modifier.height(5.dp))
-
             Image(
                 painter = painterResource(id = R.drawable.img_logo),
-                contentDescription = stringResource(id = R.string.logo)
+                contentDescription = stringResource(id = R.string.logo),
+                modifier = modifier.size(55.dp)
             )
         }
 
         OutlinedTextField(
             value = editTextValue,
-            onValueChange = {
-                onValueChange(it)
-            },
+            onValueChange = onValueChange,
             modifier = modifier
                 .fillMaxWidth()
                 .height(55.dp)
@@ -100,43 +93,46 @@ fun CommonHeader(
                 focusedBorderColor = Color.White,
                 unfocusedBorderColor = Color.White,
                 containerColor = Color.White
-
             )
         )
+        Spacer(modifier = Modifier.height(7.dp))
+
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .background(LightGrey),
+                .background(LightGrey)
+                .padding(vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "back",
-                modifier = modifier.size(30.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
+            IconButton(
+                onClick = onBackClick,
+                modifier = Modifier.size(30.dp)
+            ) {
+                iconBack?.let {
+                    Icon(
+                        imageVector = it,
+                        contentDescription = stringResource(id = R.string.back)
+                    )
+                }
+            }
 
             Text(
                 text = screenName,
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .padding(start = 8.dp),
                 textAlign = TextAlign.Center,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
+
+            Text(
+                text = changeLocation,
+                modifier = Modifier
+                    .padding(5.dp),
+                textAlign = TextAlign.End,
+                color = Blue
+            )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HeaderPreview() {
-    var state by remember {
-        mutableStateOf("")
-    }
-    CommonHeader(
-        editTextValue = state,
-        onValueChange = {
-            state = it
-        }, screenName = "Favorite", onBackClick = {}
-    )
 }
