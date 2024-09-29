@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _allProducts =
-        MutableStateFlow<Result<ProductsResponse>>(Result.Loading)
+        MutableStateFlow<ProductsResponse?>(null)
     val allProducts = _allProducts.asStateFlow()
 
     init {
@@ -32,13 +32,9 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val productsResponse = productsUseCase.getAllProductsRemote()
-                _allProducts.emit(Result.Success(productsResponse))
-            } catch (networkException: IOException) {
-                _allProducts.emit(Result.Error("Network error", networkException))
-            } catch (jsonException: JsonParseException) {
-                _allProducts.emit(Result.Error("Data parsing error", jsonException))
-            } catch (e: Exception) {
-                _allProducts.emit(Result.Error("Unexpected error", e))
+                _allProducts.emit(productsResponse)
+            } catch (_: Exception) {
+
             }
         }
     }

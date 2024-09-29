@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -44,7 +42,8 @@ fun CommonHeader(
     screenName: String,
     onBackClick: () -> Unit,
     iconBack: ImageVector? = null,
-    changeLocation: String = ""
+    changeLocation: String = "",
+    address:String=""
 ) {
     Column(
         modifier = modifier
@@ -67,7 +66,7 @@ fun CommonHeader(
             Image(
                 painter = painterResource(id = R.drawable.img_logo),
                 contentDescription = stringResource(id = R.string.logo),
-                modifier = modifier.size(55.dp)
+                modifier = modifier.size(75.dp)
             )
         }
 
@@ -106,22 +105,18 @@ fun CommonHeader(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             if (iconBack == null){
-                Text(text = "Location")
+                Text(text = address)
             }else{
                 IconButton(
                     onClick = onBackClick,
                     modifier = Modifier.size(30.dp)
                 ) {
-                    iconBack?.let {
-                        Icon(
-                            imageVector = it,
-                            contentDescription = stringResource(id = R.string.back)
-                        )
-                    }
+                    Icon(
+                        imageVector = iconBack,
+                        contentDescription = stringResource(id = R.string.back)
+                    )
                 }
             }
-
-
             Text(
                 text = screenName,
                 modifier = Modifier
@@ -130,7 +125,6 @@ fun CommonHeader(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
-
             Text(
                 text = changeLocation,
                 modifier = Modifier
