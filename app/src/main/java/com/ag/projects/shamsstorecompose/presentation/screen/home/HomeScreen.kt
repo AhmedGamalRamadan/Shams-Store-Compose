@@ -37,7 +37,9 @@ import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Blue
 import com.ag.projects.shamsstorecompose.utils.Constants
+import com.google.accompanist.pager.ExperimentalPagerApi
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
     navHostController: NavHostController
@@ -46,14 +48,16 @@ fun HomeScreen(
     val viewModel: HomeViewModel = hiltViewModel()
     val productsCatalog by viewModel.allProducts.collectAsState()
 
-    val dataProductsCatalog = productsCatalog?.data?.find { it.type == Constants.PRODUCT_CATALOG }
-    val dataProductsBrands = productsCatalog?.data?.find { it.type == Constants.BRAND }
     val dataProductsFirstSliders =
         productsCatalog?.data?.find { it.type == Constants.FIRST_BANNER_SLIDERS }
+    val dataProductsCatalog = productsCatalog?.data?.find { it.type == Constants.PRODUCT_CATALOG }
+    val dataProductsBrands = productsCatalog?.data?.find { it.type == Constants.BRAND }
 
-    val brandsContent = dataProductsBrands?.content
+
     val firstSliderContent = dataProductsFirstSliders?.content
     val productsCatalogContent = dataProductsCatalog?.content
+    val brandsContent = dataProductsBrands?.content
+
 
     val firstSliderImages = firstSliderContent?.map { it.image }
 
