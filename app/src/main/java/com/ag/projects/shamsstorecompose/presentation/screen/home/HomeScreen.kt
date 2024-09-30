@@ -46,20 +46,21 @@ fun HomeScreen(
 ) {
 
     val viewModel: HomeViewModel = hiltViewModel()
-    val productsCatalog by viewModel.allProducts.collectAsState()
+    val allProductsState by viewModel.allProducts.collectAsState()
 
     val dataProductsFirstSliders =
-        productsCatalog?.data?.find { it.type == Constants.FIRST_BANNER_SLIDERS }
-    val dataProductsCatalog = productsCatalog?.data?.find { it.type == Constants.PRODUCT_CATALOG }
-    val dataProductsBrands = productsCatalog?.data?.find { it.type == Constants.BRAND }
+        allProductsState?.data?.find { it.type == Constants.FIRST_BANNER_SLIDERS }
+    val dataProductsCatalog = allProductsState?.data?.find { it.type == Constants.PRODUCT_CATALOG }
+    val dataProductsBrands = allProductsState?.data?.find { it.type == Constants.BRAND }
+    val dataMiddleSlider =
+        allProductsState?.data?.find { it.type == Constants.MIDDLE_BANNER_SLIDER }
 
-
-    val firstSliderContent = dataProductsFirstSliders?.content
+    val middleSliderImages = dataMiddleSlider?.content?.map { it.image }
+    
+    val firstSliderImages = dataProductsFirstSliders?.content?.map { it.image }
     val productsCatalogContent = dataProductsCatalog?.content
     val brandsContent = dataProductsBrands?.content
 
-
-    val firstSliderImages = firstSliderContent?.map { it.image }
 
     var textSearchState by remember {
         mutableStateOf("")
@@ -128,6 +129,13 @@ fun HomeScreen(
                     }
                 }
             }
+            
+            //Middle Slider
+            Spacer(modifier = Modifier.height(5.dp))
+            middleSliderImages?.let { 
+                ViewPagerSliderItem(imagesUrls = it)
+            }
+
 
             //Brand Products
             Spacer(modifier = Modifier.height(5.dp))

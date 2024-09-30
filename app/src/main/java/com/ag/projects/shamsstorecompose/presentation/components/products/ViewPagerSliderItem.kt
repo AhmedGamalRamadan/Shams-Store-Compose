@@ -72,8 +72,8 @@ fun ViewPagerSliderItem(
             activeColor = Color.Black,
             inactiveColor = Grey,
             modifier = Modifier.padding(16.dp),
-            indicatorWidth = 8.dp,
-            indicatorHeight = 8.dp,
+            indicatorWidth = 9.dp,
+            indicatorHeight = 9.dp,
         )
 
     }
