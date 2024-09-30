@@ -1,5 +1,6 @@
 package com.ag.projects.shamsstorecompose.presentation.screen.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,25 +27,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.ag.projects.shamsstorecompose.R
-import com.ag.projects.shamsstorecompose.presentation.components.BrandsItemCard
+import com.ag.projects.shamsstorecompose.presentation.components.products.BrandsItemCard
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
-import com.ag.projects.shamsstorecompose.presentation.components.ProductCatalogCard
+import com.ag.projects.shamsstorecompose.presentation.components.products.ProductCatalogCard
+import com.ag.projects.shamsstorecompose.presentation.components.products.ViewPagerSliderItem
+import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Blue
 import com.ag.projects.shamsstorecompose.utils.Constants
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navHostController: NavHostController
+) {
 
     val viewModel: HomeViewModel = hiltViewModel()
     val productsCatalog by viewModel.allProducts.collectAsState()
 
     val dataProductsCatalog = productsCatalog?.data?.find { it.type == Constants.PRODUCT_CATALOG }
     val dataProductsBrands = productsCatalog?.data?.find { it.type == Constants.BRAND }
+    val dataProductsFirstSliders =
+        productsCatalog?.data?.find { it.type == Constants.FIRST_BANNER_SLIDERS }
 
     val brandsContent = dataProductsBrands?.content
+    val firstSliderContent = dataProductsFirstSliders?.content
     val productsCatalogContent = dataProductsCatalog?.content
+
+    val firstSliderImages = firstSliderContent?.map { it.image }
 
     var textSearchState by remember {
         mutableStateOf("")
@@ -65,11 +76,19 @@ fun HomeScreen() {
             onBackClick = {},
             changeLocation = "Change"
         )
+
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(12.dp)
         ) {
+
+            //First Slider
+            firstSliderImages?.let {
+                ViewPagerSliderItem(imagesUrls = it)
+            }
+
 
             //Products Catalog
             Spacer(modifier = Modifier.height(5.dp))
@@ -84,7 +103,10 @@ fun HomeScreen() {
                 )
                 Text(
                     text = stringResource(id = R.string.view_all),
-                    color = Blue
+                    color = Blue,
+                    modifier = Modifier.clickable {
+                        navHostController.navigate(NavigationItem.Brands.route)
+                    }
                 )
             }
             LazyHorizontalGrid(

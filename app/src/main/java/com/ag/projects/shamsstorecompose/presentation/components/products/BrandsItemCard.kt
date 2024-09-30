@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.presentation.components
+package com.ag.projects.shamsstorecompose.presentation.components.products
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

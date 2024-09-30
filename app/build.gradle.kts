@@ -93,6 +93,13 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
 
+    //dots indicator
+    implementation("com.google.accompanist:accompanist-pager:0.30.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.30.0")
+
+    //splash screen api
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     implementation(project(mapOf("path" to ":domain")))
     implementation(project(mapOf("path" to ":data")))
 
