@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.presentation.screen.brands
+package com.ag.projects.shamsstorecompose.presentation.screen.category
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +18,7 @@ import androidx.navigation.NavHostController
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 
 @Composable
-fun BrandsScreen(
+fun CategoryScreen(
     navHostController: NavHostController
 ) {
 
@@ -37,7 +37,7 @@ fun BrandsScreen(
             onValueChange = {
                 textSearchState = it
             },
-            screenName = "All Brands",
+            screenName = "All Category",
             onBackClick = {
                 navHostController.navigateUp()
             },
@@ -54,5 +54,4 @@ fun BrandsScreen(
         }
 
     }
-
 }

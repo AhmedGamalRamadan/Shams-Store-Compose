@@ -82,7 +82,6 @@ fun HomeScreen(
             changeLocation = "Change"
         )
 
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -94,33 +93,33 @@ fun HomeScreen(
                 ViewPagerSliderItem(imagesUrls = it)
             }
 
-
             //Products Catalog
-            Spacer(modifier = Modifier.height(5.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(id = R.string.product_catalog),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-                Text(
-                    text = stringResource(id = R.string.view_all),
-                    color = Blue,
-                    modifier = Modifier.clickable {
-                        navHostController.navigate(NavigationItem.Brands.route)
-                    }
-                )
-            }
-            LazyHorizontalGrid(
-                rows = GridCells.Fixed(2),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            ) {
-                productsCatalogContent?.let {
+            productsCatalogContent?.let {
+                Spacer(modifier = Modifier.height(5.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.product_catalog),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                    Text(
+                        text = stringResource(id = R.string.view_all),
+                        color = Blue,
+                        modifier = Modifier.clickable {
+                            navHostController.navigate(NavigationItem.AllCategory.route)
+                        }
+                    )
+                }
+                LazyHorizontalGrid(
+                    rows = GridCells.Fixed(2),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                ) {
                     items(productsCatalogContent) {
                         ProductCatalogCard(
                             imageUrl = it.image,
@@ -129,49 +128,50 @@ fun HomeScreen(
                     }
                 }
             }
-            
+
             //Middle Slider
-            Spacer(modifier = Modifier.height(5.dp))
-            middleSliderImages?.let { 
+            middleSliderImages?.let {
+                Spacer(modifier = Modifier.height(5.dp))
                 ViewPagerSliderItem(imagesUrls = it)
             }
 
-
             //Brand Products
-            Spacer(modifier = Modifier.height(5.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(id = R.string.brand),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-                Text(
-                    text = stringResource(id = R.string.view_all),
-                    color = Blue
-                )
+           brandsContent?.let {
+               Spacer(modifier = Modifier.height(5.dp))
+               Row(
+                   modifier = Modifier.fillMaxWidth(),
+                   horizontalArrangement = Arrangement.SpaceBetween
+               ) {
+                   Text(
+                       text = stringResource(id = R.string.brand),
+                       fontWeight = FontWeight.Bold,
+                       fontSize = 20.sp
+                   )
+                   Text(
+                       text = stringResource(id = R.string.view_all),
+                       color = Blue,
+                       modifier = Modifier.clickable {
+                           navHostController.navigate(NavigationItem.Brand.route)
+                       }
+                   )
 
-            }
-            LazyHorizontalGrid(
-                rows = GridCells.Fixed(2),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            ) {
-                brandsContent?.let {
-                    items(brandsContent) {
-                        BrandsItemCard(
-                            brandImage = it.image,
-                        )
-                    }
-                }
-            }
+               }
+
+               LazyHorizontalGrid(
+                   rows = GridCells.Fixed(2),
+                   modifier = Modifier
+                       .fillMaxWidth()
+                       .height(200.dp)
+               ) {
+                   items(brandsContent) {
+                       BrandsItemCard(
+                           brandImage = it.image,
+                       )
+                   }
+               }
+           }
 
         }
-
     }
-
 
 }

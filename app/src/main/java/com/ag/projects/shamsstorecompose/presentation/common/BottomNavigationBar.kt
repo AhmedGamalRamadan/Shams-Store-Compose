@@ -20,7 +20,7 @@ import com.ag.projects.shamsstorecompose.presentation.ui.theme.Blue
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         NavigationItem.Home,
-        NavigationItem.Brands,
+        NavigationItem.AllCategory,
         NavigationItem.Cart,
         NavigationItem.Info
     )

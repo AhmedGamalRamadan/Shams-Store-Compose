@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ag.projects.shamsstorecompose.presentation.common.BottomNavigationBar
 import com.ag.projects.shamsstorecompose.presentation.screen.brands.BrandsScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.cart.CartScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.category.CategoryScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.home.HomeScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.info.InfoScreen
 
@@ -39,9 +40,11 @@ fun Navigation() {
                 startDestination = NavigationItem.Home.route
             ) {
                 composable(NavigationItem.Home.route) { HomeScreen(navHostController = navController) }
-                composable(NavigationItem.Brands.route) { BrandsScreen() }
+                composable(NavigationItem.AllCategory.route) { CategoryScreen(navHostController = navController) }
                 composable(NavigationItem.Cart.route) { CartScreen() }
                 composable(NavigationItem.Info.route) { InfoScreen() }
+
+                composable(NavigationItem.Brand.route) { BrandsScreen(navHostController = navController) }
             }
         }
     }
