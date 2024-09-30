@@ -53,5 +53,6 @@
     <string name="total_amount">Total Amount:</string>
     <string name="back">back</string>
     <string name="loading">Loading .....</string>
+    <string name="error_happen">Error Happen</string>
 
 </resources>

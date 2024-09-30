@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.presentation.screen.cart
+package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

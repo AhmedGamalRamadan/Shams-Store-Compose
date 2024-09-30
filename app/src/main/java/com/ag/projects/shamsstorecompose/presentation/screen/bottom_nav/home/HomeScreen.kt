@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.presentation.screen.home
+package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

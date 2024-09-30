@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.presentation.screen.category
+package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,11 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -40,6 +37,7 @@ fun CategoryScreen(
     val viewModel: HomeViewModel = hiltViewModel()
     val categoriesState by viewModel.categoriesState.collectAsState()
 
+    viewModel.getAllCategories()
 
     val configuration = LocalConfiguration.current
     val screenWidthDp = configuration.screenWidthDp.dp
@@ -79,7 +77,15 @@ fun CategoryScreen(
         ) {
 
             when (categoriesState) {
-                is Result.Error -> {}
+                is Result.Error -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text =(categoriesState as Result.Error).message.toString())
+                    }
+
+                }
                 Result.Loading -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),

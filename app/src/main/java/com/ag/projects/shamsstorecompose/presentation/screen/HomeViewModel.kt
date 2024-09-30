@@ -25,12 +25,14 @@ class HomeViewModel @Inject constructor(
     val allProducts = _allProducts.asStateFlow()
 
     private val _categoriesState = MutableStateFlow<Result<CategoriesResponse>>(Result.Loading)
-     val categoriesState = _categoriesState.asStateFlow()
+    val categoriesState = _categoriesState.asStateFlow()
+
+    private val _brandsState = MutableStateFlow<Result<CategoriesResponse>>(Result.Loading)
+    val brandsState = _brandsState.asStateFlow()
 
 
     init {
         getAllProducts()
-        getAllCategories()
     }
 
 
@@ -48,7 +50,8 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-    private fun getAllCategories() {
+
+    fun getAllCategories() {
         viewModelScope.launch {
             try {
                 val productsResponse = productsUseCase.getAllCategories()
@@ -59,6 +62,21 @@ class HomeViewModel @Inject constructor(
                 _categoriesState.emit(Result.Error("Data parsing error", jsonException))
             } catch (e: Exception) {
                 _categoriesState.emit(Result.Error("Unexpected error", e))
+            }
+        }
+    }
+
+     fun getAllBrands() {
+        viewModelScope.launch {
+            try {
+                val productsResponse = productsUseCase.getAllBrands()
+                _brandsState.emit(Result.Success(productsResponse))
+            } catch (networkException: IOException) {
+                _brandsState.emit(Result.Error("Network error", networkException))
+            } catch (jsonException: JsonParseException) {
+                _brandsState.emit(Result.Error("Data parsing error", jsonException))
+            } catch (e: Exception) {
+                _brandsState.emit(Result.Error("Unexpected error", e))
             }
         }
     }

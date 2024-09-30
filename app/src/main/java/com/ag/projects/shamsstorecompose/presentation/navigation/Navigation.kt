@@ -12,10 +12,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ag.projects.shamsstorecompose.presentation.common.BottomNavigationBar
 import com.ag.projects.shamsstorecompose.presentation.screen.brands.BrandsScreen
-import com.ag.projects.shamsstorecompose.presentation.screen.cart.CartScreen
-import com.ag.projects.shamsstorecompose.presentation.screen.category.CategoryScreen
-import com.ag.projects.shamsstorecompose.presentation.screen.home.HomeScreen
-import com.ag.projects.shamsstorecompose.presentation.screen.info.InfoScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart.CartScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category.CategoryScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.home.HomeScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info.InfoScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

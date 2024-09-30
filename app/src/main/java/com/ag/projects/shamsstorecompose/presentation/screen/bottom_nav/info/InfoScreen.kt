@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.presentation.screen.info
+package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
