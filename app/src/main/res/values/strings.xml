@@ -2,6 +2,8 @@
     <string name="app_name">ShamsStoreCompose</string>
 
     <string name="search_products">Search Products</string>
+    <string name="add">Add</string>
+    <string name="minus">Minus</string>
     <string name="search">Search....</string>
     <string name="location_name">King Abduallah,45</string>
     <string name="Change">Change</string>

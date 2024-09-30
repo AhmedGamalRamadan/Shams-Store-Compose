@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -32,7 +34,8 @@ import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.products.BrandsItemCard
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 import com.ag.projects.shamsstorecompose.presentation.components.products.ProductCatalogCard
-import com.ag.projects.shamsstorecompose.presentation.components.products.ViewPagerSliderItem
+import com.ag.projects.shamsstorecompose.presentation.components.products.ProductItemCard
+import com.ag.projects.shamsstorecompose.presentation.components.products.slider.ViewPagerSliderItem
 import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Blue
@@ -89,7 +92,8 @@ fun HomeScreen(
                     }
 
                     //Products Catalog
-                    val productsCatalogContent = data.find { it.type==Constants.PRODUCT_CATALOG }?.content
+                    val productsCatalogContent =
+                        data.find { it.type == Constants.PRODUCT_CATALOG }?.content
                     productsCatalogContent?.let {
                         Spacer(modifier = Modifier.height(5.dp))
 
@@ -126,14 +130,15 @@ fun HomeScreen(
                     }
 
                     //Middle Slider
-                    val middleSliderImages = data.find { it.type==Constants.MIDDLE_BANNER_SLIDER }?.content?.map { it.image }
+                    val middleSliderImages =
+                        data.find { it.type == Constants.MIDDLE_BANNER_SLIDER }?.content?.map { it.image }
                     middleSliderImages?.let {
                         Spacer(modifier = Modifier.height(5.dp))
                         ViewPagerSliderItem(imagesUrls = it)
                     }
 
                     //Brand Products
-                    val brandsContent = data.find { it.type==Constants.BRAND }?.content
+                    val brandsContent = data.find { it.type == Constants.BRAND }?.content
                     brandsContent?.let {
                         Spacer(modifier = Modifier.height(5.dp))
                         Row(
@@ -163,6 +168,41 @@ fun HomeScreen(
                                 BrandsItemCard(
                                     brandImage = it.image,
                                 )
+                            }
+                        }
+                    }
+
+                    //Most Popular Products
+                    val popularProductContent =
+                        data.find { it.type == Constants.MOST_POPULAR_PRODUCTS }?.content
+
+                    popularProductContent?.let {
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.most_popular_products),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp
+                            )
+                            Text(
+                                text = stringResource(id = R.string.view_all),
+                                color = Blue,
+                                modifier = Modifier.clickable {
+                                    navHostController.navigate(NavigationItem.Brand.route)
+                                }
+                            )
+                        }
+
+                        LazyRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
+                        ) {
+                            items(popularProductContent) {
+                                ProductItemCard(content = it)
                             }
                         }
                     }

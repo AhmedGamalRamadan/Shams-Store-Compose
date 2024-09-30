@@ -82,7 +82,7 @@ fun BrandsScreen(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text =(brandContent as Result.Error).message.toString())
+                        Text(text =(brandContent as Result.Error).message)
                     }
 
                 }

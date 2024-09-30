@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package com.ag.projects.shamsstorecompose.presentation.components.products
+package com.ag.projects.shamsstorecompose.presentation.components.products.slider
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
