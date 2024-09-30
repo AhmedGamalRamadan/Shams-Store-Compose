@@ -39,12 +39,22 @@ fun Navigation() {
                 navController = navController,
                 startDestination = NavigationItem.Home.route
             ) {
-                composable(NavigationItem.Home.route) { HomeScreen(navHostController = navController) }
-                composable(NavigationItem.AllCategory.route) { CategoryScreen(navHostController = navController) }
-                composable(NavigationItem.Cart.route) { CartScreen() }
-                composable(NavigationItem.Info.route) { InfoScreen() }
+                composable(NavigationItem.Home.route) {
+                    HomeScreen(navHostController = navController)
+                }
+                composable(NavigationItem.AllCategory.route) {
+                    CategoryScreen(navHostController = navController)
+                }
+                composable(NavigationItem.Cart.route) {
+                    CartScreen()
+                }
+                composable(NavigationItem.Info.route) {
+                    InfoScreen()
+                }
 
-                composable(NavigationItem.Brand.route) { BrandsScreen(navHostController = navController) }
+                composable(NavigationItem.Brand.route) {
+                    BrandsScreen(navHostController = navController)
+                }
             }
         }
     }

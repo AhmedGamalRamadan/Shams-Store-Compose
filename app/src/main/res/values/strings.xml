@@ -52,5 +52,6 @@
     <string name="order_time">Order Time:</string>
     <string name="total_amount">Total Amount:</string>
     <string name="back">back</string>
+    <string name="loading">Loading .....</string>
 
 </resources>

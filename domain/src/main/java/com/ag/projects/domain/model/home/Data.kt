@@ -1,4 +1,4 @@
-package com.ag.projects.domain.model
+package com.ag.projects.domain.model.home
 
 data class Data(
     val content: List<Content>,
