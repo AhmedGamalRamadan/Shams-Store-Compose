@@ -37,6 +37,7 @@ import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Blue
 import com.ag.projects.shamsstorecompose.utils.Constants
+import com.ag.projects.shamsstorecompose.utils.Result
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @OptIn(ExperimentalPagerApi::class)
@@ -47,20 +48,6 @@ fun HomeScreen(
 
     val viewModel: HomeViewModel = hiltViewModel()
     val allProductsState by viewModel.allProducts.collectAsState()
-
-    val dataProductsFirstSliders =
-        allProductsState?.data?.find { it.type == Constants.FIRST_BANNER_SLIDERS }
-    val dataProductsCatalog = allProductsState?.data?.find { it.type == Constants.PRODUCT_CATALOG }
-    val dataProductsBrands = allProductsState?.data?.find { it.type == Constants.BRAND }
-    val dataMiddleSlider =
-        allProductsState?.data?.find { it.type == Constants.MIDDLE_BANNER_SLIDER }
-
-    val middleSliderImages = dataMiddleSlider?.content?.map { it.image }
-    
-    val firstSliderImages = dataProductsFirstSliders?.content?.map { it.image }
-    val productsCatalogContent = dataProductsCatalog?.content
-    val brandsContent = dataProductsBrands?.content
-
 
     var textSearchState by remember {
         mutableStateOf("")
@@ -87,90 +74,100 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(12.dp)
         ) {
+            when (allProductsState) {
+                is Result.Error -> {}
+                Result.Loading -> {}
 
-            //First Slider
-            firstSliderImages?.let {
-                ViewPagerSliderItem(imagesUrls = it)
-            }
+                is Result.Success -> {
+                    val data = (allProductsState as Result.Success).data.data
 
-            //Products Catalog
-            productsCatalogContent?.let {
-                Spacer(modifier = Modifier.height(5.dp))
+                    //First Slider
+                    val firstSlider =
+                        data.find { it.type == Constants.FIRST_BANNER_SLIDERS }?.content?.map { it.image }
+                    firstSlider?.let {
+                        ViewPagerSliderItem(imagesUrls = it)
+                    }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.product_catalog),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
-                    )
-                    Text(
-                        text = stringResource(id = R.string.view_all),
-                        color = Blue,
-                        modifier = Modifier.clickable {
-                            navHostController.navigate(NavigationItem.AllCategory.route)
+                    //Products Catalog
+                    val productsCatalogContent = data.find { it.type==Constants.PRODUCT_CATALOG }?.content
+                    productsCatalogContent?.let {
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.product_catalog),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp
+                            )
+                            Text(
+                                text = stringResource(id = R.string.view_all),
+                                color = Blue,
+                                modifier = Modifier.clickable {
+                                    navHostController.navigate(NavigationItem.AllCategory.route)
+                                }
+                            )
                         }
-                    )
-                }
-                LazyHorizontalGrid(
-                    rows = GridCells.Fixed(2),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                ) {
-                    items(productsCatalogContent) {
-                        ProductCatalogCard(
-                            imageUrl = it.image,
-                            productName = it.name
-                        )
+                        LazyHorizontalGrid(
+                            rows = GridCells.Fixed(2),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp)
+                        ) {
+                            items(productsCatalogContent) {
+                                ProductCatalogCard(
+                                    imageUrl = it.image,
+                                    productName = it.name
+                                )
+                            }
+                        }
+                    }
+
+                    //Middle Slider
+                    val middleSliderImages = data.find { it.type==Constants.MIDDLE_BANNER_SLIDER }?.content?.map { it.image }
+                    middleSliderImages?.let {
+                        Spacer(modifier = Modifier.height(5.dp))
+                        ViewPagerSliderItem(imagesUrls = it)
+                    }
+
+                    //Brand Products
+                    val brandsContent = data.find { it.type==Constants.BRAND }?.content
+                    brandsContent?.let {
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.brand),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp
+                            )
+                            Text(
+                                text = stringResource(id = R.string.view_all),
+                                color = Blue,
+                                modifier = Modifier.clickable {
+                                    navHostController.navigate(NavigationItem.Brand.route)
+                                }
+                            )
+                        }
+                        LazyHorizontalGrid(
+                            rows = GridCells.Fixed(2),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp)
+                        ) {
+                            items(brandsContent) {
+                                BrandsItemCard(
+                                    brandImage = it.image,
+                                )
+                            }
+                        }
                     }
                 }
             }
-
-            //Middle Slider
-            middleSliderImages?.let {
-                Spacer(modifier = Modifier.height(5.dp))
-                ViewPagerSliderItem(imagesUrls = it)
-            }
-
-            //Brand Products
-           brandsContent?.let {
-               Spacer(modifier = Modifier.height(5.dp))
-               Row(
-                   modifier = Modifier.fillMaxWidth(),
-                   horizontalArrangement = Arrangement.SpaceBetween
-               ) {
-                   Text(
-                       text = stringResource(id = R.string.brand),
-                       fontWeight = FontWeight.Bold,
-                       fontSize = 20.sp
-                   )
-                   Text(
-                       text = stringResource(id = R.string.view_all),
-                       color = Blue,
-                       modifier = Modifier.clickable {
-                           navHostController.navigate(NavigationItem.Brand.route)
-                       }
-                   )
-
-               }
-
-               LazyHorizontalGrid(
-                   rows = GridCells.Fixed(2),
-                   modifier = Modifier
-                       .fillMaxWidth()
-                       .height(200.dp)
-               ) {
-                   items(brandsContent) {
-                       BrandsItemCard(
-                           brandImage = it.image,
-                       )
-                   }
-               }
-           }
-
         }
     }
 
