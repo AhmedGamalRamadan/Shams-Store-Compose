@@ -14,11 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 
 @Composable
-fun CartScreen() {
+fun CartScreen(
+    navHostController: NavHostController
+
+) {
 
     var textSearchState by remember {
         mutableStateOf("")
@@ -36,7 +40,9 @@ fun CartScreen() {
                 textSearchState = it
             },
             screenName = stringResource(id = R.string.shoppingcart),
-            onBackClick = {},
+            onBackClick = {
+                navHostController.navigateUp()
+            },
             iconBack = painterResource(id = R.drawable.ic_arrow_back)
         )
         Column(

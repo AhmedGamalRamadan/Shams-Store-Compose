@@ -58,7 +58,6 @@ fun CategoryScreen(
         mutableStateOf("")
     }
 
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -125,8 +124,9 @@ fun CategoryScreen(
                         }
                     }
                 }
-
             }
         }
+
+
     }
 }

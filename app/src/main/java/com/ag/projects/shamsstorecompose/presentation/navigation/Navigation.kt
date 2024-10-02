@@ -46,10 +46,10 @@ fun Navigation() {
                     CategoryScreen(navHostController = navController)
                 }
                 composable(NavigationItem.Cart.route) {
-                    CartScreen()
+                    CartScreen(navHostController = navController)
                 }
                 composable(NavigationItem.Info.route) {
-                    InfoScreen()
+                    InfoScreen(navHostController = navController)
                 }
 
                 composable(NavigationItem.Brand.route) {
