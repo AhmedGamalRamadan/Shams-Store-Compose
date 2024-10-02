@@ -1,5 +1,6 @@
 package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -26,6 +28,7 @@ import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 import com.ag.projects.shamsstorecompose.presentation.components.products.CategoriesItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
+import com.ag.projects.shamsstorecompose.utils.NetworkConnection
 import com.ag.projects.shamsstorecompose.utils.Result
 
 @Composable
@@ -37,6 +40,10 @@ fun CategoryScreen(
     val categoriesState by viewModel.categoriesState.collectAsState()
 
     viewModel.getAllCategories()
+    val context = LocalContext.current
+
+    val isWifiConnected = NetworkConnection.checkWifiConnection(context)
+
 
     val configuration = LocalConfiguration.current
     val screenWidthDp = configuration.screenWidthDp.dp
@@ -73,40 +80,53 @@ fun CategoryScreen(
             modifier = Modifier
                 .padding(12.dp)
         ) {
+            if (!isWifiConnected) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_no_internt),
+                        contentDescription = stringResource(R.string.no_internet_connection)
+                    )
+                }
+            } else {
+                when (categoriesState) {
+                    is Result.Error -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = (categoriesState as Result.Error).message.toString())
+                        }
 
-            when (categoriesState) {
-                is Result.Error -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(text =(categoriesState as Result.Error).message.toString())
                     }
 
-                }
-                Result.Loading -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(text = stringResource(id = R.string.loading))
+                    Result.Loading -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = stringResource(id = R.string.loading))
+                        }
                     }
-                }
-                is Result.Success -> {
-                    val productsCategory = (categoriesState as Result.Success).data.data
 
-                    LazyVerticalGrid(columns = GridCells.Fixed(numberOfColumns)) {
-                        items(productsCategory) {
-                            CategoriesItem(
-                                categoryImage = it.image,
-                                categoryName = it.name.toString()
-                            )
+                    is Result.Success -> {
+                        val productsCategory = (categoriesState as Result.Success).data.data
 
+                        LazyVerticalGrid(columns = GridCells.Fixed(numberOfColumns)) {
+                            items(productsCategory) {
+                                CategoriesItem(
+                                    categoryImage = it.image,
+                                    categoryName = it.name.toString()
+                                )
+
+                            }
                         }
                     }
                 }
+
             }
         }
-
     }
 }

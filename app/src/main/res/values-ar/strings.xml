@@ -8,6 +8,7 @@
     <string name="loading">تحميل .....</string>
     <string name="error_happen">حدث خطأ</string>
     <string name="no_internet_connection">لا يوجد اتصال بالإنترنت</string>
+    <string name="logo">Logo</string>
     <string name="search_products">البحث عن المنتجات</string>
     <string name="location_name">King Abduallah,45</string>
     <string name="Change">تغيير</string>

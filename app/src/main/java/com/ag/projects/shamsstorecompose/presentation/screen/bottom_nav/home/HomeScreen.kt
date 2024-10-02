@@ -45,8 +45,8 @@ import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Blue
 import com.ag.projects.shamsstorecompose.utils.Constants
+import com.ag.projects.shamsstorecompose.utils.NetworkConnection
 import com.ag.projects.shamsstorecompose.utils.Result
-import com.ag.projects.shamsstorecompose.utils.checkWifiConnection
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @OptIn(ExperimentalPagerApi::class)
@@ -62,7 +62,7 @@ fun HomeScreen(
     var textSearchState by remember {
         mutableStateOf("")
     }
-    val isWifiConnected = checkWifiConnection(context)
+    val isWifiConnected = NetworkConnection.checkWifiConnection(context)
 
     Column(
         modifier = Modifier
