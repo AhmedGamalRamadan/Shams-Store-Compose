@@ -69,7 +69,7 @@ fun CategoryScreen(
             onValueChange = {
                 textSearchState = it
             },
-            screenName = "All Category",
+            screenName = stringResource(id = R.string.all_category),
             onBackClick = {
                 navHostController.navigateUp()
             },
