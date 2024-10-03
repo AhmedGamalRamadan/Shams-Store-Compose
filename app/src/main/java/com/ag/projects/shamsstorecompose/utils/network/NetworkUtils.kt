@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.utils
+package com.ag.projects.shamsstorecompose.utils.network
 
 import android.content.Context
 import android.net.ConnectivityManager

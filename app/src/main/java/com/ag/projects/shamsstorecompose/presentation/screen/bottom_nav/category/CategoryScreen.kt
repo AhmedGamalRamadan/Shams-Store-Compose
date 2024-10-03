@@ -28,7 +28,7 @@ import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 import com.ag.projects.shamsstorecompose.presentation.components.products.CategoriesItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
-import com.ag.projects.shamsstorecompose.utils.NetworkConnection
+import com.ag.projects.shamsstorecompose.utils.network.NetworkConnection
 import com.ag.projects.shamsstorecompose.utils.Result
 
 @Composable

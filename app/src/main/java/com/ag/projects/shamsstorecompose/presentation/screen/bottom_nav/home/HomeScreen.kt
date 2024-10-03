@@ -45,7 +45,7 @@ import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Blue
 import com.ag.projects.shamsstorecompose.utils.Constants
-import com.ag.projects.shamsstorecompose.utils.NetworkConnection
+import com.ag.projects.shamsstorecompose.utils.network.NetworkConnection
 import com.ag.projects.shamsstorecompose.utils.Result
 import com.google.accompanist.pager.ExperimentalPagerApi
 

@@ -84,4 +84,8 @@
     <string name="previous">سابق</string>
     <string name="user_name">Ahmed Gamal</string>
     <string name="user_phone">0123456798</string>
+    <string name="product_description">وصف المنتج</string>
+    <string name="product_description_ans">مستوحى من العناية بالبشرة بحمض الهيالورونيك ، يساعد الشامبو المغنط للترطيب على معالجة الجفاف وعلامات الجفاف مع ما يصل إلى 72 ساعة من الترطيب</string>
+    <string name="related_products">منتجات ذات صله</string>
+    <string name="no_data_available">لا توجد بيانات متاحة</string>
 </resources>

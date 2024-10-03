@@ -84,5 +84,9 @@
     <string name="previous">Previous</string>
     <string name="user_name">Ahmed Gamal</string>
     <string name="user_phone">0123456798</string>
+    <string name="product_description">Product Description</string>
+    <string name="product_description_ans">Inspired by hyaluronic acid skincare, the moisture-magnetizing shampoo helps tackle dryness and signs of dehydration with up to 72 hours of moist</string>
+    <string name="related_products">Related Products</string>
+    <string name="no_data_available">No Data Available</string>
 
 </resources>
