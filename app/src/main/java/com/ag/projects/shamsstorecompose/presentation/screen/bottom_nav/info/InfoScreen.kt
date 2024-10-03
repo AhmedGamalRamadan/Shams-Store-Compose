@@ -1,5 +1,6 @@
 package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
@@ -26,6 +28,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -62,7 +65,11 @@ fun InfoScreen(
                     coroutineScope.launch { sheetState.hide() }
                 }
             )
-        }
+        },
+        sheetShape = RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp),
+        modifier = Modifier
+            .background(Color.White)
+
     ) {
         Column(
             modifier = Modifier
@@ -89,11 +96,14 @@ fun InfoScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Current Language: ${
-                        if (selectedLanguage == "en") stringResource(id = R.string.english) else stringResource(
+                    text = stringResource(
+                        R.string.current_language,
+                        if (selectedLanguage == "en")
+                            stringResource(id = R.string.english)
+                        else stringResource(
                             id = R.string.arabic
                         )
-                    }"
+                    )
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -102,10 +112,10 @@ fun InfoScreen(
                 }) {
                     Icon(
                         imageVector = Icons.Default.Language,
-                        contentDescription = "Change Language"
+                        contentDescription = stringResource(R.string.change_language)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Change Language")
+                    Text(text = stringResource(R.string.change_language))
                 }
             }
         }

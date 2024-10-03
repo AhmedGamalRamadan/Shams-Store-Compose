@@ -88,5 +88,8 @@
     <string name="product_description_ans">Inspired by hyaluronic acid skincare, the moisture-magnetizing shampoo helps tackle dryness and signs of dehydration with up to 72 hours of moist</string>
     <string name="related_products">Related Products</string>
     <string name="no_data_available">No Data Available</string>
+    <string name="select_language">Select Language</string>
+    <string name="current_language">Current Language: %1$s</string>
+    <string name="change_language">Change Language</string>
 
 </resources>
