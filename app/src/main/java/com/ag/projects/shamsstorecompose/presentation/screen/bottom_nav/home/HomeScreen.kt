@@ -77,7 +77,7 @@ fun HomeScreen(
             },
             screenName = "",
             onBackClick = {},
-            changeLocation = "Change"
+            changeLocation = stringResource(id = R.string.change)
         )
 
         Column(

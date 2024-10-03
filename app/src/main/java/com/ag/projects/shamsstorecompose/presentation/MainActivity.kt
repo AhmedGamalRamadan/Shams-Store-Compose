@@ -15,31 +15,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             ShamsStoreComposeTheme {
                 Navigation()
-//                val viewModel: HomeViewModel = hiltViewModel()
-//                val state by viewModel.allProducts.collectAsState()
-//
-//                when (state) {
-//                    is Result.Error -> {}
-//                    Result.Loading -> {
-//                        Box(
-//                            modifier = Modifier.fillMaxSize(),
-//                            contentAlignment = Alignment.Center
-//                        ) {
-//                            Text(text ="Loading .. . . . .")
-//                        }
-//                    }
-//
-//                    is Result.Success -> {
-//                        val content = (state as Result.Success).data.data.flatMap { it.content }
-//                        LazyColumn(modifier = Modifier.fillMaxSize()) {
-//                            items(content) {
-//
-//                                Text(text = content.toString())
-//                            }
-//                        }
-//                    }
-//                }
-
             }
         }
     }
