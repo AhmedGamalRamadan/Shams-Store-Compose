@@ -38,13 +38,13 @@ fun CustomExpandableRow(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(7.dp)
     ) {
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(55.dp)
-                .padding(15.dp)
+                .height(60.dp)
                 .background(LightBGQA)
                 .clickable { isExpanded = !isExpanded },
             horizontalArrangement = Arrangement.SpaceBetween
@@ -60,12 +60,10 @@ fun CustomExpandableRow(
         }
 
         if (isExpanded){
-
             Text(
                 text =  HtmlCompat.fromHtml(answer,HtmlCompat.FROM_HTML_MODE_LEGACY).toString(),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(9.dp)
             )
         }
 
