@@ -36,11 +36,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
+import com.ag.projects.shamsstorecompose.presentation.components.CustomRowQA
 import com.ag.projects.shamsstorecompose.presentation.components.bottom_sheet.LanguageSelectionBottomSheet
+import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
 import com.ag.projects.shamsstorecompose.utils.localization.setAppLocale
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun InfoScreen(
     navHostController: NavHostController
@@ -49,76 +50,105 @@ fun InfoScreen(
     var textSearchState by remember {
         mutableStateOf("")
     }
-    val context = LocalContext.current
-    var selectedLanguage by remember { mutableStateOf("en") }
-    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val coroutineScope = rememberCoroutineScope()
 
-    ModalBottomSheetLayout(
-        sheetState = sheetState,
-        sheetContent = {
-            LanguageSelectionBottomSheet(
-                selectedLanguage = selectedLanguage,
-                onLanguageSelected = { languageCode ->
-                    selectedLanguage = languageCode
-                    setAppLocale(context, selectedLanguage)
-                    coroutineScope.launch { sheetState.hide() }
-                }
-            )
-        },
-        sheetShape = RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp),
+    Column(
         modifier = Modifier
-            .background(Color.White)
-
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
+
+        CommonHeader(
+            editTextValue = textSearchState,
+            onValueChange = {
+                textSearchState = it
+            },
+            screenName = stringResource(id = R.string.info),
+            onBackClick = {
+                navHostController.navigateUp()
+            },
+            iconBack = painterResource(id = R.drawable.ic_arrow_back),
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .padding(12.dp)
         ) {
-            CommonHeader(
-                editTextValue = textSearchState,
-                onValueChange = {
-                    textSearchState = it
-                },
-                screenName = stringResource(id = R.string.info),
-                onBackClick = {
-                    navHostController.navigateUp()
-                },
-                iconBack = painterResource(id = R.drawable.ic_arrow_back)
+
+            CustomRowQA(
+                title = stringResource(id = R.string.saved_address),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
             )
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = stringResource(
-                        R.string.current_language,
-                        if (selectedLanguage == "en")
-                            stringResource(id = R.string.english)
-                        else stringResource(
-                            id = R.string.arabic
-                        )
-                    )
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(onClick = {
-                    coroutineScope.launch { sheetState.show() }
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Language,
-                        contentDescription = stringResource(R.string.change_language)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.change_language))
+            CustomRowQA(
+                title = stringResource(id = R.string.which_list),
+                onRowClick = {
+                    navHostController.navigate("")
                 }
-            }
+            )
+
+            CustomRowQA(
+                title = stringResource(id = R.string.orders),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+
+            CustomRowQA(
+                title = stringResource(id = R.string.notifications),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+
+            CustomRowQA(
+                title = stringResource(id = R.string.payment_methods),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+            CustomRowQA(
+                title = stringResource(id = R.string.settings),
+                onRowClick = {
+                    navHostController.navigate(NavigationItem.Settings.route)
+                }
+            )
+            CustomRowQA(
+                title = stringResource(id = R.string.store_locator),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+
+            CustomRowQA(
+                title = stringResource(id = R.string.faq),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+            CustomRowQA(
+                title = stringResource(id = R.string.contact_us),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+
+            CustomRowQA(
+                title = stringResource(id = R.string.privacy_policy),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+            CustomRowQA(
+                title = stringResource(id = R.string.terms_conditions),
+                onRowClick = {
+                    navHostController.navigate("")
+                }
+            )
+
+
         }
     }
-
 }

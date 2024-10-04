@@ -16,6 +16,7 @@ import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart.Car
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category.CategoryScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.home.HomeScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info.InfoScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.qa.settings.SettingsScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,6 +55,10 @@ fun Navigation() {
 
                 composable(NavigationItem.Brand.route) {
                     BrandsScreen(navHostController = navController)
+                }
+
+                composable(NavigationItem.Settings.route){
+                    SettingsScreen(navHostController = navController)
                 }
             }
         }

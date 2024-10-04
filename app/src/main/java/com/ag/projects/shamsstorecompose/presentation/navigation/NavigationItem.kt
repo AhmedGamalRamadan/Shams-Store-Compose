@@ -8,4 +8,5 @@ sealed class NavigationItem(val route: String, val icon: Int, val label: String)
     object Cart : NavigationItem("cart", R.drawable.ic_cart, "Cart")
     object Info : NavigationItem("info", R.drawable.ic_profile, "Info")
     object Brand : NavigationItem("Brand", 0, "Brand")
+    object Settings : NavigationItem("settings", 0, "Settings")
 }

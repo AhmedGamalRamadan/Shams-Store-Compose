@@ -91,5 +91,6 @@
     <string name="select_language">Select Language</string>
     <string name="current_language">Current Language: %1$s</string>
     <string name="change_language">Change Language</string>
+    <string name="go_to">goTo</string>
 
 </resources>
