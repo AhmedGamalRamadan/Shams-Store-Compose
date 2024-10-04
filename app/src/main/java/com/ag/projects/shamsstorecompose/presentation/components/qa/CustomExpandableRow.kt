@@ -16,9 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.HtmlCompat
@@ -44,30 +46,43 @@ fun CustomExpandableRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
+                .height(50.dp)
                 .background(LightBGQA)
                 .clickable { isExpanded = !isExpanded },
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
+                modifier = Modifier
+                    .padding(5.dp),
                 text = question,
-                fontSize = 16.sp
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
             )
-            Image(
-                painter = painterResource(id = R.drawable.ic_arrow_go_to),
-                contentDescription = stringResource(id = R.string.go_to)
-            )
-        }
+            if (isExpanded) {
+                Image(
+                    modifier = Modifier
+                        .padding(3.dp),
+                    painter = painterResource(id = R.drawable.ic_arrow_down),
+                    contentDescription = stringResource(id = R.string.go_to)
+                )
+            } else {
+                Image(
+                    modifier = Modifier
+                        .padding(3.dp),
+                    painter = painterResource(id = R.drawable.ic_arrow_go_to),
+                    contentDescription = stringResource(id = R.string.go_to)
+                )
+            }
 
-        if (isExpanded){
+        }
+        if (isExpanded) {
             Text(
-                text =  HtmlCompat.fromHtml(answer,HtmlCompat.FROM_HTML_MODE_LEGACY).toString(),
+                text = HtmlCompat.fromHtml(answer, HtmlCompat.FROM_HTML_MODE_LEGACY).toString(),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(4.dp)
             )
         }
-
     }
-
-
 }
