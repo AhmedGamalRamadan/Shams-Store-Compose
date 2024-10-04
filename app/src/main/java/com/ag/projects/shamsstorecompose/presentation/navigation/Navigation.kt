@@ -17,6 +17,7 @@ import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.home.HomeScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info.InfoScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.settings.SettingsScreen
+import com.ag.projects.shamsstorecompose.utils.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,11 +54,11 @@ fun Navigation() {
                     InfoScreen(navHostController = navController)
                 }
 
-                composable(NavigationItem.Brand.route) {
+                composable(Screen.Brand.rout) {
                     BrandsScreen(navHostController = navController)
                 }
 
-                composable(NavigationItem.Settings.route){
+                composable(Screen.Settings.rout){
                     SettingsScreen(navHostController = navController)
                 }
             }
