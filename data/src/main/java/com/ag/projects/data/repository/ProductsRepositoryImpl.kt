@@ -3,6 +3,7 @@ package com.ag.projects.data.repository
 import com.ag.projects.data.remote.ProductsAPIServices
 import com.ag.projects.domain.model.brand.CategoriesResponse
 import com.ag.projects.domain.model.home.ProductsResponse
+import com.ag.projects.domain.model.qa.policy.PolicyDataResponse
 import com.ag.projects.domain.repository.ProductsRepository
 
 class ProductsRepositoryImpl(
@@ -16,4 +17,7 @@ class ProductsRepositoryImpl(
 
     override suspend fun getAllBrands(): CategoriesResponse =
         productsAPIServices.getAllBrands()
+
+    override suspend fun getPrivacyPolicy(): PolicyDataResponse =
+        productsAPIServices.getPrivacyPolicy()
 }

@@ -16,6 +16,7 @@ import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart.Car
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category.CategoryScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.home.HomeScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info.InfoScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.qa.privacy_policy.PrivacyPolicyScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.settings.SettingsScreen
 import com.ag.projects.shamsstorecompose.utils.Screen
 
@@ -60,6 +61,10 @@ fun Navigation() {
 
                 composable(Screen.Settings.rout){
                     SettingsScreen(navHostController = navController)
+                }
+
+                composable(Screen.PrivacyPolicy.rout){
+                    PrivacyPolicyScreen(navHostController = navController)
                 }
             }
         }

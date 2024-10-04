@@ -2,6 +2,7 @@ package com.ag.projects.data.remote
 
 import com.ag.projects.domain.model.brand.CategoriesResponse
 import com.ag.projects.domain.model.home.ProductsResponse
+import com.ag.projects.domain.model.qa.policy.PolicyDataResponse
 import com.ag.projects.domain.utils.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -25,6 +26,9 @@ interface ProductsAPIServices {
         @Query("lat") lat: Double = Constants.LAT,
         @Query("lng") lng: Double = Constants.LNG
     ): CategoriesResponse
+
+    @GET("policy")
+    suspend fun getPrivacyPolicy(): PolicyDataResponse
 
 
 }

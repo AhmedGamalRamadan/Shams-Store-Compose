@@ -1,4 +1,4 @@
-package com.ag.projects.shamsstorecompose.presentation.components
+package com.ag.projects.shamsstorecompose.presentation.components.qa
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

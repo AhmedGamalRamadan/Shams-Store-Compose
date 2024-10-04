@@ -22,8 +22,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
-import com.ag.projects.shamsstorecompose.presentation.components.CustomRowQA
+import com.ag.projects.shamsstorecompose.presentation.components.qa.CustomRowQA
 import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
+import com.ag.projects.shamsstorecompose.utils.Screen
 
 @Composable
 fun InfoScreen(
@@ -111,14 +112,12 @@ fun InfoScreen(
             )
             Spacer(modifier = Modifier.height(6.dp))
 
-
             CustomRowQA(
                 title = stringResource(id = R.string.store_locator),
                 onRowClick = {
                     navHostController.navigate("")
                 }
             )
-
             CustomRowQA(
                 title = stringResource(id = R.string.faq),
                 onRowClick = {
@@ -141,7 +140,7 @@ fun InfoScreen(
             CustomRowQA(
                 title = stringResource(id = R.string.privacy_policy),
                 onRowClick = {
-                    navHostController.navigate("")
+                    navHostController.navigate(Screen.PrivacyPolicy.rout)
                 }
             )
             CustomRowQA(
@@ -150,8 +149,6 @@ fun InfoScreen(
                     navHostController.navigate("")
                 }
             )
-
-
         }
     }
 }
