@@ -67,37 +67,27 @@ fun InfoScreen(
             Spacer(modifier = Modifier.height(6.dp))
             CustomRowQA(
                 title = stringResource(id = R.string.saved_address),
-                onRowClick = {
-                    navHostController.navigate("")
-                }
+                onRowClick = {}
             )
 
             CustomRowQA(
                 title = stringResource(id = R.string.which_list),
-                onRowClick = {
-                    navHostController.navigate("")
-                }
+                onRowClick = {}
             )
 
             CustomRowQA(
                 title = stringResource(id = R.string.orders),
-                onRowClick = {
-                    navHostController.navigate("")
-                }
+                onRowClick = {}
             )
 
             CustomRowQA(
                 title = stringResource(id = R.string.notifications),
-                onRowClick = {
-                    navHostController.navigate("")
-                }
+                onRowClick = {}
             )
 
             CustomRowQA(
                 title = stringResource(id = R.string.payment_methods),
-                onRowClick = {
-                    navHostController.navigate("")
-                }
+                onRowClick = {}
             )
             CustomRowQA(
                 title = stringResource(id = R.string.settings),
@@ -114,9 +104,7 @@ fun InfoScreen(
 
             CustomRowQA(
                 title = stringResource(id = R.string.store_locator),
-                onRowClick = {
-                    navHostController.navigate("")
-                }
+                onRowClick = {}
             )
             CustomRowQA(
                 title = stringResource(id = R.string.faq),
@@ -126,9 +114,7 @@ fun InfoScreen(
             )
             CustomRowQA(
                 title = stringResource(id = R.string.contact_us),
-                onRowClick = {
-                    navHostController.navigate("")
-                }
+                onRowClick = {}
             )
             Text(
                 text = stringResource(id = R.string.legal),
@@ -146,7 +132,7 @@ fun InfoScreen(
             CustomRowQA(
                 title = stringResource(id = R.string.terms_conditions),
                 onRowClick = {
-                    navHostController.navigate("")
+                    navHostController.navigate(Screen.TermsAndCondition.rout)
                 }
             )
         }
