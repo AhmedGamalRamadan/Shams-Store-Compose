@@ -121,7 +121,7 @@ fun InfoScreen(
             CustomRowQA(
                 title = stringResource(id = R.string.faq),
                 onRowClick = {
-                    navHostController.navigate("")
+                    navHostController.navigate(Screen.FAQ.rout)
                 }
             )
             CustomRowQA(

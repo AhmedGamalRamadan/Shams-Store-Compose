@@ -16,8 +16,10 @@ import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart.Car
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category.CategoryScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.home.HomeScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info.InfoScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.qa.faq.FAQScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.privacy_policy.PrivacyPolicyScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.settings.SettingsScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.qa.terms_condition.TermsAndConditionScreen
 import com.ag.projects.shamsstorecompose.utils.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,6 +67,14 @@ fun Navigation() {
 
                 composable(Screen.PrivacyPolicy.rout){
                     PrivacyPolicyScreen(navHostController = navController)
+                }
+
+                composable(Screen.FAQ.rout){
+                    FAQScreen(navHostController = navController)
+                }
+
+                composable(Screen.TermsAndCondition.rout){
+                    TermsAndConditionScreen(navHostController = navController)
                 }
             }
         }

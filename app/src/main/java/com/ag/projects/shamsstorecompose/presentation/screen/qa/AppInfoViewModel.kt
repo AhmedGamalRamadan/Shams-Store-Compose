@@ -24,6 +24,8 @@ class AppInfoViewModel @Inject constructor(
 
     init {
         getPrivacyPolicyData()
+        getFAqData()
+        getTermsAndConditionData()
     }
 
     private val _privacyPolicyState = MutableStateFlow<Result<PolicyDataResponse>>(Result.Loading)
