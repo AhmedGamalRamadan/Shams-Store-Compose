@@ -92,6 +92,19 @@
     <string name="current_language">اللغه الحاليه: %1$s</string>
     <string name="change_language">تغيير اللغه</string>
     <string name="go_to">الزهاب الي</string>
+    <string name="hello">مرحبًا</string>
+    <string name="let_s_get_started">دعونا نبدأ</string>
+    <string name="log_in_to_your_account_by_your_mobile_number">قم بتسجيل الدخول إلى حسابك باستخدام رقم هاتفك المحمول.</string>
+    <string name="mobile_number">رقم الهاتف المحمول*</string>
+    <string name="i_agree_to_the_processing_of_personal_data_that_i_confirm_with_terms_conditions">أوافق على معالجة البيانات الشخصية التي أؤكدها بالشروط والأحكام.</string>
+    <string name="confirm">يتأكد</string>
+    <string name="phone_number_must_be_9_digits">يجب أن يكون رقم الهاتف مكونًا من 9 أرقام</string>
+    <string name="phone_verification">التحقق من الهاتف</string>
+    <string name="you_will_receive_a_sms_code_to_your_phone_number">سيتم إرسال رمز SMS إلى رقم هاتفك:</string>
+    <string name="edit">التعديل</string>
+    <string name="enter_received_code">أدخل الرمز</string>
+    <string name="verify">التحقق</string>
+    <string name="resend_code_00_59">إعادة إرسال الكود: 00:59</string>
 
 
 

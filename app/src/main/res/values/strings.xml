@@ -92,5 +92,18 @@
     <string name="current_language">Current Language: %1$s</string>
     <string name="change_language">Change Language</string>
     <string name="go_to">goTo</string>
+    <string name="hello">Hello</string>
+    <string name="let_s_get_started">Let\'s get started</string>
+    <string name="log_in_to_your_account_by_your_mobile_number">Log in to your account by your Mobile Number.</string>
+    <string name="mobile_number">Mobile Number*</string>
+    <string name="i_agree_to_the_processing_of_personal_data_that_i_confirm_with_terms_conditions"><![CDATA[I agree to the processing of personal data that I confirm with Terms & Conditions.]]></string>
+    <string name="confirm">Confirm</string>
+    <string name="phone_number_must_be_9_digits">Phone number must be 9 digits</string>
+    <string name="phone_verification">Phone Verification</string>
+    <string name="you_will_receive_a_sms_code_to_your_phone_number">You will receive a SMS code to your phone number:</string>
+    <string name="edit">Edit</string>
+    <string name="enter_received_code">Enter received code</string>
+    <string name="verify">Verify</string>
+    <string name="resend_code_00_59">Resend code: 00:59</string>
 
 </resources>
