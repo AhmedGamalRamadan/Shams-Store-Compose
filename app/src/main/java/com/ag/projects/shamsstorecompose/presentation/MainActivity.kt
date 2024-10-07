@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.ag.projects.shamsstorecompose.presentation.navigation.Navigation
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.ShamsStoreComposeTheme
+import com.ag.projects.shamsstorecompose.utils.network.getAddressFromLatLng
 import dagger.hilt.android.AndroidEntryPoint
 
 const val REQUEST_CODE = 100
@@ -22,6 +23,7 @@ const val REQUEST_CODE = 100
 @AndroidEntryPoint
 class MainActivity : ComponentActivity(), LocationListener {
 
+    private var currentAddress: String =""
     private lateinit var locationManager: LocationManager
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -43,9 +45,8 @@ class MainActivity : ComponentActivity(), LocationListener {
         setContent {
             ShamsStoreComposeTheme {
                 locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                Navigation()
                 launchLocationPermission()
-
+                Navigation(currentAddress)
             }
         }
     }
@@ -116,6 +117,8 @@ class MainActivity : ComponentActivity(), LocationListener {
     override fun onLocationChanged(location: Location) {
         val latitude = location.latitude
         val longitude = location.longitude
+        currentAddress = getAddressFromLatLng(this, latitude, longitude)
         Log.d("Location is ", "$latitude .. ... $longitude")
+
     }
 }

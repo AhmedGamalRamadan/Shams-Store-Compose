@@ -52,7 +52,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    address:String
 ) {
 
     val viewModel: HomeViewModel = hiltViewModel()
@@ -77,7 +78,8 @@ fun HomeScreen(
             },
             screenName = "",
             onBackClick = {},
-            changeLocation = stringResource(id = R.string.change)
+            changeLocation = stringResource(id = R.string.change),
+            address = address.toString()
         )
 
         Column(

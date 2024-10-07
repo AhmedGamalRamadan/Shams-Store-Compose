@@ -24,7 +24,9 @@ import com.ag.projects.shamsstorecompose.utils.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Navigation() {
+fun Navigation(
+    address: String
+) {
 
     val navController = rememberNavController()
 
@@ -45,7 +47,10 @@ fun Navigation() {
                 startDestination = NavigationItem.Home.route
             ) {
                 composable(NavigationItem.Home.route) {
-                    HomeScreen(navHostController = navController)
+                    HomeScreen(
+                        navHostController = navController,
+                        address = address
+                    )
                 }
                 composable(NavigationItem.AllCategory.route) {
                     CategoryScreen(navHostController = navController)
@@ -61,19 +66,19 @@ fun Navigation() {
                     BrandsScreen(navHostController = navController)
                 }
 
-                composable(Screen.Settings.rout){
+                composable(Screen.Settings.rout) {
                     SettingsScreen(navHostController = navController)
                 }
 
-                composable(Screen.PrivacyPolicy.rout){
+                composable(Screen.PrivacyPolicy.rout) {
                     PrivacyPolicyScreen(navHostController = navController)
                 }
 
-                composable(Screen.FAQ.rout){
+                composable(Screen.FAQ.rout) {
                     FAQScreen(navHostController = navController)
                 }
 
-                composable(Screen.TermsAndCondition.rout){
+                composable(Screen.TermsAndCondition.rout) {
                     TermsAndConditionScreen(navHostController = navController)
                 }
             }
