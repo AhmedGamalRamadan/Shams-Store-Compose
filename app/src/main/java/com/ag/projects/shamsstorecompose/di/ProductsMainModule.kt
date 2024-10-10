@@ -3,7 +3,7 @@ package com.ag.projects.shamsstorecompose.di
 import com.ag.projects.data.remote.ProductsAPIServices
 import com.ag.projects.data.repository.ProductsRepositoryImpl
 import com.ag.projects.domain.repository.ProductsRepository
-import com.ag.projects.domain.usecase.GetProductsUseCase
+import com.ag.projects.domain.usecase.products.GetProductsUseCase
 import com.ag.projects.domain.utils.Constants
 import dagger.Module
 import dagger.Provides

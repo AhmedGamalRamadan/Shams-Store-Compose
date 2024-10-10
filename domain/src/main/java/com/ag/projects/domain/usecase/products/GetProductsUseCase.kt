@@ -1,4 +1,4 @@
-package com.ag.projects.domain.usecase
+package com.ag.projects.domain.usecase.products
 
 import com.ag.projects.domain.model.home.ProductsResponse
 import com.ag.projects.domain.model.qa.about.AboutResponse

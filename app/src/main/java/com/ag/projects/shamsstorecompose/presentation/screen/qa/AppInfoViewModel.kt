@@ -7,7 +7,7 @@ import com.ag.projects.domain.model.qa.contact_us.ContactUsResponse
 import com.ag.projects.domain.model.qa.faq.FAQResponse
 import com.ag.projects.domain.model.qa.policy.PolicyDataResponse
 import com.ag.projects.domain.model.qa.tarms_conditon.TermsAndConditionResponse
-import com.ag.projects.domain.usecase.GetProductsUseCase
+import com.ag.projects.domain.usecase.products.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

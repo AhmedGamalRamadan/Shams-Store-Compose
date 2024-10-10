@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ag.projects.domain.model.brand.CategoriesResponse
 import com.ag.projects.domain.model.home.ProductsResponse
-import com.ag.projects.domain.usecase.GetProductsUseCase
+import com.ag.projects.domain.usecase.products.GetProductsUseCase
 import com.google.gson.JsonParseException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
