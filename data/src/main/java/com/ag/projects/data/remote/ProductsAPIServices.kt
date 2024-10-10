@@ -13,37 +13,37 @@ import retrofit2.http.Query
 
 interface ProductsAPIServices {
 
-    @GET("home")
+    @GET(Constants.HOME)
     suspend fun getAllProducts(
         @Query("lat") lat: Double = Constants.LAT,
         @Query("lng") lng: Double = Constants.LNG
     ): ProductsResponse
 
-    @GET("categories")
+    @GET(Constants.CATEGORIES)
     suspend fun getAllCategories(
         @Query("lat") lat: Double = Constants.LAT,
         @Query("lng") lng: Double = Constants.LNG
     ): CategoriesResponse
 
-    @GET("brands")
+    @GET(Constants.BRAND)
     suspend fun getAllBrands(
         @Query("lat") lat: Double = Constants.LAT,
         @Query("lng") lng: Double = Constants.LNG
     ): CategoriesResponse
 
-    @GET("policy")
+    @GET(Constants.POLICY)
     suspend fun getPrivacyPolicy(): PolicyDataResponse
 
-    @GET("terms")
+    @GET(Constants.TERMS)
     suspend fun getTermsAndCondition(): TermsAndConditionResponse
 
-    @GET("about")
+    @GET(Constants.ABOUT)
     suspend fun getAboutUsData(): AboutResponse
 
-    @GET("FAQs")
+    @GET(Constants.FAQ)
     suspend fun getFAQData(): FAQResponse
 
-    @GET("contact")
+    @GET(Constants.CONTACT)
     suspend fun getContactUs(): ContactUsResponse
 
 
