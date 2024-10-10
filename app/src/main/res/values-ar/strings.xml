@@ -106,7 +106,36 @@
     <string name="verify">التحقق</string>
     <string name="resend_code_00_59">إعادة إرسال الكود: 00:59</string>
 
-
+    <string name="please_enter_your_password_to_create_your_new_account">الرجاء إدخال كلمة المرور الخاصة بك لإنشاء حسابك الجديد.</string>
+    <string name="password">كلمه المرور</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="password_matched">كلمة المرور متطابقة</string>
+    <string name="if_a_you_already_have_an_account_please_log_in">إذا كان لديك حساب بالفعل يرجى تسجيل الدخول</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="the_phone_number_not_valid">رقم الهاتف غير صالح</string>
+    <string name="dots">----</string>
+    <string name="enter_the_otp_code">أدخل رمز OTP</string>
+    <string name="the_otp_must_be_4_numbers">يجب أن يتكون OTP من 4 أرقام</string>
+    <string name="agree_about_terms_and_conditions">الموافقة على الشروط والأحكام</string>
+    <string name="please_enter_your_name_to_create_your_new_account">الرجاء إدخال اسمك لإنشاء حسابك الجديد.</string>
+    <string name="your_name">الاسم</string>
+    <string name="wellcome">أهلًا وسهلًا</string>
+    <string name="start_shopping">ابدأ التسوق</string>
+    <string name="my_account">حسابي</string>
+    <string name="password_must_contain_a_z_and_special_characters">Password must contain a-z and special characters!</string>
+    <string name="write_your_name">اكتب اسمك</string>
+    <string name="logout">الخروج</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="personal_information">المعلومات الشخصية</string>
+    <string name="name">اسم</string>
+    <string name="gender">جنس</string>
+    <string name="male">ذكر</string>
+    <string name="female">أنثى</string>
+    <string name="nationality">جنسية</string>
+    <string name="do_you_want_to_remove_this_item_from_favorites">Do you want to remove \n this item from Favorites?</string>
+    <string name="do_you_want_to_see_this_message_again">Do you want to see this message again?</string>
+    <string name="remove">حزف</string>
+    <string name="resend_code">اعاده ارسال الكود</string>
 
 
 </resources>
