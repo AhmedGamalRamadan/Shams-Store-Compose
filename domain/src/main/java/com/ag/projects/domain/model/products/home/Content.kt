@@ -1,4 +1,4 @@
-package com.ag.projects.domain.model.home
+package com.ag.projects.domain.model.products.home
 data class Content(
     val available_quantity: Int,
     val brand: Brand,

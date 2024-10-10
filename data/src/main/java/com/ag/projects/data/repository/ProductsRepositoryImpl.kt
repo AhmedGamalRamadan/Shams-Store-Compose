@@ -1,8 +1,8 @@
 package com.ag.projects.data.repository
 
 import com.ag.projects.data.remote.ProductsAPIServices
-import com.ag.projects.domain.model.brand.CategoriesResponse
-import com.ag.projects.domain.model.home.ProductsResponse
+import com.ag.projects.domain.model.products.brand.CategoriesResponse
+import com.ag.projects.domain.model.products.home.ProductsResponse
 import com.ag.projects.domain.model.qa.about.AboutResponse
 import com.ag.projects.domain.model.qa.contact_us.ContactUsResponse
 import com.ag.projects.domain.model.qa.faq.FAQResponse
