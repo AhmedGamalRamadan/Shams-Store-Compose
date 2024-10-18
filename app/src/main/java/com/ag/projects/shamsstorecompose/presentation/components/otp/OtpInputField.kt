@@ -87,11 +87,11 @@ fun OtpInputField(
             )
 
             // Auto focus the first field
-            LaunchedEffect(Unit) {
-                if (index == 0) {
-                    focusRequesters[index].requestFocus()
-                }
-            }
+//            LaunchedEffect(Unit) {
+//                if (index == 0) {
+//                    focusRequesters[index].requestFocus()
+//                }
+//            }
         }
     }
 }

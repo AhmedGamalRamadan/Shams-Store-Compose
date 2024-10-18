@@ -117,7 +117,7 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(RegisterBGGrey)
-                .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 2.dp))
+                .clip(RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
                 .padding(start = 12.dp, end = 12.dp)
         ) {
 
@@ -234,7 +234,7 @@ fun LoginScreen(
                 Text(
                     text = stringResource(id = R.string.confirm),
                     color = White,
-                    fontSize = 22.sp
+                    fontSize = 18.sp
                 )
             }
         }
