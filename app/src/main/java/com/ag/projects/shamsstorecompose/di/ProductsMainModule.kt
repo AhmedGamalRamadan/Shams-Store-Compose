@@ -3,6 +3,9 @@ package com.ag.projects.shamsstorecompose.di
 import com.ag.projects.data.remote.ProductsAPIServices
 import com.ag.projects.data.repository.ProductsRepositoryImpl
 import com.ag.projects.domain.repository.ProductsRepository
+import com.ag.projects.domain.usecase.auth.login.LoginUseCase
+import com.ag.projects.domain.usecase.auth.register.RegisterUseCase
+import com.ag.projects.domain.usecase.auth.verify.VerifyUSeCase
 import com.ag.projects.domain.usecase.products.GetProductsUseCase
 import com.ag.projects.domain.utils.Constants
 import dagger.Module
@@ -73,8 +76,25 @@ object ProductsMainModule {
 
     @Provides
     @Singleton
-    fun provideUseCase(productsRepository: ProductsRepository) =
+    fun provideProductsUseCase(productsRepository: ProductsRepository) =
         GetProductsUseCase(productsRepository)
 
+    /*
+    Auth
+     */
 
+    @Provides
+    @Singleton
+    fun provideLoginUseCase(productsRepository: ProductsRepository) =
+        LoginUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideRegisterUseCase(productsRepository: ProductsRepository) =
+        RegisterUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideVerifyOTPUseCase(productsRepository: ProductsRepository) =
+        VerifyUSeCase(productsRepository)
 }
