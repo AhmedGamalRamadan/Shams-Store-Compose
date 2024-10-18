@@ -93,6 +93,7 @@ fun Navigation(
                 composable(Screen.Login.rout) {
                     LoginScreen(navHostController = navController)
                 }
+
                 composable(
                     Screen.VerifyOTP.rout + "/{countryID}/{countryCode}/{userPhoneNumber}",
                     arguments = listOf(
@@ -106,11 +107,31 @@ fun Navigation(
                         backStackEntry = navBackStackEntry
                     )
                 }
-                composable(Screen.RegisterUserName.rout) {
-                    RegisterUserNameScreen(navHostController = navController)
+
+                composable(
+                    Screen.RegisterUserName.rout + "/{userPhoneNumber}/{countryID}",
+                    arguments = listOf(
+                        navArgument("userPhoneNumber") { type = NavType.StringType },
+                        navArgument("countryID") { type = NavType.IntType },
+                    )
+                ) { navBackStackEntry ->
+                    RegisterUserNameScreen(
+                        navHostController = navController,
+                        navBackStackEntry = navBackStackEntry
+                    )
                 }
-                composable(Screen.LoginSuccess.rout) {
-                    LoginSuccessScreen(navHostController = navController)
+
+                composable(
+                    Screen.LoginSuccess.rout + "/{userName}/{fullPhoneNumber}",
+                    arguments = listOf(
+                        navArgument("userName") { type = NavType.StringType },
+                        navArgument("fullPhoneNumber") { type = NavType.StringType }
+                    )
+                ) { navBackStackEntry ->
+                    LoginSuccessScreen(
+                        navHostController = navController,
+                        backStackEntry = navBackStackEntry
+                    )
                 }
 
             }
