@@ -19,3 +19,6 @@ val DarkBlue =Color(0xFF273C98)
 val LightBlue =Color(0xFF5975F1)
 val LightBGQA =Color(0xFFDEE6F4)
 val LightWhiteBGQA =Color(0xFFEEF3F9)
+
+val RegisterBGGrey=Color(0xFFEEF3F9)
+val LightGreen=Color(0xFF02A9E0)

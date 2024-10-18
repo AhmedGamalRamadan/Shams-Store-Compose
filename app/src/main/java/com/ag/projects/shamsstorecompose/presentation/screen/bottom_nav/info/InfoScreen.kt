@@ -32,6 +32,7 @@ import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 import com.ag.projects.shamsstorecompose.presentation.components.qa.CustomRowQA
 import com.ag.projects.shamsstorecompose.presentation.navigation.NavigationItem
+import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.utils.Screen
 
 @Composable
@@ -74,14 +75,16 @@ fun InfoScreen(
 
             } else {
                 Button(
-                    onClick = { },
+                    onClick = {
+                              navHostController.navigate(Screen.Login.rout)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 14.dp, end = 14.dp)
-                        .height(88.dp)
+                        .height(48.dp)
                         .clip(RoundedCornerShape(12.dp)),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Blue,
+                        containerColor = LightGreen,
                         contentColor = Color.White
                     )
                 ) {
