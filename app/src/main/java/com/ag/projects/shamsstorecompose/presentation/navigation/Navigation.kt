@@ -11,6 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ag.projects.shamsstorecompose.presentation.common.BottomNavigationBar
+import com.ag.projects.shamsstorecompose.presentation.screen.auth.login.LoginScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.auth.login_success.LoginSuccessScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.auth.register.RegisterUserNameScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.auth.verify_otp.VerifyOTPScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.brands.BrandsScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart.CartScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category.CategoryScreen
@@ -81,6 +85,23 @@ fun Navigation(
                 composable(Screen.TermsAndCondition.rout) {
                     TermsAndConditionScreen(navHostController = navController)
                 }
+                /*
+                Auth
+                 */
+                composable(Screen.Login.rout){
+                    LoginScreen(navHostController = navController)
+                }
+                composable(Screen.VerifyOTP.rout){
+
+                    VerifyOTPScreen(navHostController = navController)
+                }
+                composable(Screen.RegisterUserName.rout){
+                    RegisterUserNameScreen(navHostController = navController)
+                }
+                composable(Screen.LoginSuccess.rout){
+                    LoginSuccessScreen(navHostController = navController)
+                }
+
             }
         }
     }
