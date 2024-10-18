@@ -2,7 +2,6 @@ package com.ag.projects.data.remote
 
 import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.domain.model.auth.login.LoginResponse
-import com.ag.projects.domain.model.auth.register.RegisterResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
 import com.ag.projects.domain.model.country.AllCountriesResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
@@ -64,7 +63,7 @@ interface ProductsAPIServices {
     suspend fun verifyOTP(@Body loginRequest: AuthenticationRequest): VerifyResponse
 
     @POST(Constants.REGISTER)
-    suspend fun register(@Body registerRequest: AuthenticationRequest): RegisterResponse
+    suspend fun register(@Body registerRequest: AuthenticationRequest): VerifyResponse
 
 
 }
