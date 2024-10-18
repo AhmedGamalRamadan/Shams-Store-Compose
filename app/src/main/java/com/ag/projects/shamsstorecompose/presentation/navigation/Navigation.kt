@@ -7,9 +7,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.ag.projects.shamsstorecompose.presentation.common.BottomNavigationBar
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.login.LoginScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.login_success.LoginSuccessScreen
@@ -88,17 +90,26 @@ fun Navigation(
                 /*
                 Auth
                  */
-                composable(Screen.Login.rout){
+                composable(Screen.Login.rout) {
                     LoginScreen(navHostController = navController)
                 }
-                composable(Screen.VerifyOTP.rout){
-
-                    VerifyOTPScreen(navHostController = navController)
+                composable(
+                    Screen.VerifyOTP.rout + "/{countryID}/{countryCode}/{userPhoneNumber}",
+                    arguments = listOf(
+                        navArgument("countryID") { type = NavType.IntType },
+                        navArgument("countryCode") { type = NavType.StringType },
+                        navArgument("userPhoneNumber") { type = NavType.StringType },
+                    )
+                ) { navBackStackEntry ->
+                    VerifyOTPScreen(
+                        navHostController = navController,
+                        backStackEntry = navBackStackEntry
+                    )
                 }
-                composable(Screen.RegisterUserName.rout){
+                composable(Screen.RegisterUserName.rout) {
                     RegisterUserNameScreen(navHostController = navController)
                 }
-                composable(Screen.LoginSuccess.rout){
+                composable(Screen.LoginSuccess.rout) {
                     LoginSuccessScreen(navHostController = navController)
                 }
 

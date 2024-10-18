@@ -1,9 +1,7 @@
 package com.ag.projects.shamsstorecompose.presentation.screen.auth.login
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,9 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -46,6 +42,7 @@ import com.ag.projects.shamsstorecompose.presentation.components.spinner_country
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.RegisterBGGrey
 import com.ag.projects.shamsstorecompose.utils.Result
+import com.ag.projects.shamsstorecompose.utils.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,14 +52,15 @@ fun LoginScreen(
 ) {
 
     var countryID = 0
-    val context = LocalContext.current
+    var countryCode = ""
+    var userPhoneNumber by remember {
+        mutableStateOf("")
+    }
 
+    val context = LocalContext.current
     val countryList by viewModel.countries.collectAsState()
     val userLogin by viewModel.login.collectAsState()
 
-    var txtUserPhoneNumber by remember {
-        mutableStateOf("")
-    }
     var checkboxState by remember {
         mutableStateOf(false)
     }
@@ -149,15 +147,16 @@ fun LoginScreen(
                             item {
                                 CountryItem(country = country[0])
                                 countryID = country[0].id
+                                countryCode = country[0].phone_code
                             }
                         }
                     }
                 }
 
                 OutlinedTextField(
-                    value = txtUserPhoneNumber,
+                    value = userPhoneNumber,
                     onValueChange = {
-                        txtUserPhoneNumber = it
+                        userPhoneNumber = it
                     },
                     modifier = Modifier
                         .fillMaxHeight()
@@ -200,12 +199,27 @@ fun LoginScreen(
                     viewModel.login(
                         loginRequest = AuthenticationRequest(
                             country_id = countryID,
-                            phone = txtUserPhoneNumber,
+                            phone = userPhoneNumber,
                             device_token = "",
                         )
                     )
+                    when (userLogin) {
+                        is Result.Error -> {}
+                        Result.Loading -> {}
+                        is Result.Success -> {
+                            /*
+                        Navigate to OTP Screen with
+                        1_ user mobile number(countryCode + limit)
+                        2_ userID
+                        3_CountryCode
+                        */
+                            navHostController.navigate(
+                                Screen.VerifyOTP.rout + "/$countryID/$countryCode/$userPhoneNumber"
+                            )
 
-                    Toast.makeText(context, "$countryID", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
                 },
                 modifier = Modifier
                     .fillMaxWidth()
