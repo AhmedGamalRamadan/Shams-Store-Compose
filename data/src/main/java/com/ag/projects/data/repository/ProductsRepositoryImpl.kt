@@ -1,6 +1,10 @@
 package com.ag.projects.data.repository
 
 import com.ag.projects.data.remote.ProductsAPIServices
+import com.ag.projects.domain.model.auth.login.AuthenticationRequest
+import com.ag.projects.domain.model.auth.login.LoginResponse
+import com.ag.projects.domain.model.auth.verify.VerifyResponse
+import com.ag.projects.domain.model.country.AllCountriesResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
 import com.ag.projects.domain.model.products.home.ProductsResponse
 import com.ag.projects.domain.model.qa.about.AboutResponse
@@ -37,4 +41,19 @@ class ProductsRepositoryImpl(
     override suspend fun getContactUs(): ContactUsResponse =
         productsAPIServices.getContactUs()
 
+    override suspend fun getAllCountries(): AllCountriesResponse =
+        productsAPIServices.getAllCountries()
+
+    /*
+    Auth
+     */
+    override suspend fun login(loginRequest: AuthenticationRequest): LoginResponse =
+        productsAPIServices.login(loginRequest)
+
+
+    override suspend fun verifyOTP(loginRequest: AuthenticationRequest): VerifyResponse =
+        productsAPIServices.verifyOTP(loginRequest)
+
+    override suspend fun register(registerRequest: AuthenticationRequest): VerifyResponse =
+        productsAPIServices.register(registerRequest)
 }

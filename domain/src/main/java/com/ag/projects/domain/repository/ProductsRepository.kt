@@ -1,5 +1,9 @@
 package com.ag.projects.domain.repository
 
+import com.ag.projects.domain.model.auth.login.AuthenticationRequest
+import com.ag.projects.domain.model.auth.login.LoginResponse
+import com.ag.projects.domain.model.auth.verify.VerifyResponse
+import com.ag.projects.domain.model.country.AllCountriesResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
 import com.ag.projects.domain.model.products.home.ProductsResponse
 import com.ag.projects.domain.model.qa.about.AboutResponse
@@ -25,4 +29,15 @@ interface ProductsRepository {
     suspend fun getFAQData(): FAQResponse
 
     suspend fun getContactUs(): ContactUsResponse
+
+    suspend fun getAllCountries(): AllCountriesResponse
+
+    suspend fun login(
+        loginRequest: AuthenticationRequest
+    ): LoginResponse
+
+    suspend fun verifyOTP(loginRequest: AuthenticationRequest): VerifyResponse
+
+    suspend fun register(registerRequest: AuthenticationRequest): VerifyResponse
+
 }
