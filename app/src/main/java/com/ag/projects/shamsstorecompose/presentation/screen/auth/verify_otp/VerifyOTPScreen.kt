@@ -16,6 +16,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,6 +37,7 @@ import androidx.navigation.NavHostController
 import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.otp.OtpInputField
+import com.ag.projects.shamsstorecompose.presentation.ui.theme.DarkBlue
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.RegisterBGGrey
 import com.ag.projects.shamsstorecompose.utils.Constants
@@ -62,7 +64,7 @@ fun VerifyOTPScreen(
 
     val verifyOTPState by viewModel.verifyOTPState.collectAsState()
 
-    var otpCode by remember{
+    var otpCode by remember {
         mutableStateOf("")
     }
 
@@ -89,11 +91,11 @@ fun VerifyOTPScreen(
                 )
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(17.dp))
 
             Text(
                 text = stringResource(id = R.string.phone_verification),
-                color = Color.Blue,
+                color = DarkBlue,
                 fontSize = 30.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -106,7 +108,7 @@ fun VerifyOTPScreen(
                 fontSize = 18.sp
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(13.dp))
 
             Row(
                 modifier = Modifier
@@ -114,7 +116,7 @@ fun VerifyOTPScreen(
                     .padding(start = 12.dp)
             ) {
                 Text(
-                    text = "+$countryCode$userPhoneNumber",
+                    text = "+$countryCode  $userPhoneNumber",
                     fontWeight = FontWeight.Bold,
                     fontSize = 22.sp
                 )
@@ -165,40 +167,12 @@ fun VerifyOTPScreen(
                             )
                         )
                     }
-
-                    when (verifyOTPState) {
-                        is Result.Error -> {}
-                        Result.Loading -> {}
-                        is Result.Success -> {
-                            val data = (verifyOTPState as Result.Success).data.data
-
-                            Log.d("the status is ","Success")
-                            // if register_complete_step == 2 navigate to login Successful
-                            //with userName & Full Phone Number
-                            if (data.register_complete_step == 2) {
-                                val fullPhoneNumber = data.phone_complete_form
-                                val userFullName = data.full_name
-                                navHostController.navigate(
-                                    Screen.LoginSuccess.rout + "/$userFullName/$fullPhoneNumber"
-                                )
-                            } else {
-                                // navigate to register user name screen write user name
-                                // and pass phone without country code
-                                // and complete phone number
-                                navHostController.navigate(
-                                    Screen.RegisterUserName.rout + "/${data.phone}/${data.country.id}"
-                                )
-                            }
-                        }
-                    }
-
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 14.dp, end = 14.dp)
-                    .height(48.dp)
-                    .clip(RoundedCornerShape(12.dp)),
-                shape = RoundedCornerShape(14.dp),
+                    .height(48.dp),
+                shape = RoundedCornerShape(8.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = LightGreen
                 )
@@ -217,7 +191,35 @@ fun VerifyOTPScreen(
                 color = Color.Blue,
                 fontSize = 14.sp
             )
+        }
 
+        when (verifyOTPState) {
+            is Result.Error -> {}
+            Result.Loading -> {}
+            is Result.Success -> {
+                val data = (verifyOTPState as Result.Success).data.data
+
+                // if register_complete_step == 2 navigate to login Successful
+                //with userName & Full Phone Number
+
+                LaunchedEffect(key1 = verifyOTPState){
+                    if (data.register_complete_step == 2) {
+                        val fullPhoneNumber = data.phone_complete_form
+                        val userFullName = data.full_name
+                        navHostController.navigate(
+                            Screen.LoginSuccess.rout + "/$userFullName/$fullPhoneNumber"
+                        )
+                    } else {
+                        // navigate to register user name screen write user name
+                        // and pass phone without country code
+                        // and country code
+                        //country ID
+                        navHostController.navigate(
+                            Screen.RegisterUserName.rout + "/${data.phone}/${data.country.id}/${data.country.phone_code}"
+                        )
+                    }
+                }
+            }
         }
     }
 }

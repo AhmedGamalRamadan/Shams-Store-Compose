@@ -110,10 +110,11 @@ fun Navigation(
                 }
 
                 composable(
-                    Screen.RegisterUserName.rout + "/{${NavArguments.USER_PHONE_NUMBER}}/{${NavArguments.COUNTRY_ID}}",
+                    Screen.RegisterUserName.rout + "/{${NavArguments.USER_PHONE_NUMBER}}/{${NavArguments.COUNTRY_ID}}/{${NavArguments.COUNTRY_CODE}}",
                     arguments = listOf(
                         navArgument(NavArguments.USER_PHONE_NUMBER) { type = NavType.StringType },
                         navArgument(NavArguments.COUNTRY_ID) { type = NavType.IntType },
+                        navArgument(NavArguments.COUNTRY_CODE) { type = NavType.StringType },
                     )
                 ) { navBackStackEntry ->
                     RegisterUserNameScreen(

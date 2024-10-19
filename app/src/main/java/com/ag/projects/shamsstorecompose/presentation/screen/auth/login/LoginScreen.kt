@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,7 +50,7 @@ import com.ag.projects.shamsstorecompose.utils.Screen
 @Composable
 fun LoginScreen(
     navHostController: NavHostController,
-    ) {
+) {
 
     val viewModel: LoginScreenViewModel = hiltViewModel()
     var countryID = 0
@@ -157,7 +158,7 @@ fun LoginScreen(
 
                 OutlinedTextField(
                     value = userPhoneNumber,
-                    onValueChange = {phoneNumber->
+                    onValueChange = { phoneNumber ->
                         userPhoneNumber = phoneNumber
                     },
                     modifier = Modifier
@@ -199,7 +200,6 @@ fun LoginScreen(
 
             Button(
                 onClick = {
-
                     viewModel.login(
                         loginRequest = AuthenticationRequest(
                             country_id = countryID,
@@ -207,21 +207,6 @@ fun LoginScreen(
                             device_token = "",
                         )
                     )
-                    when (userLogin) {
-                        is Result.Error -> {}
-                        Result.Loading -> {}
-                        is Result.Success -> {
-                            /*
-                        Navigate to OTP Screen with
-                        1_ user mobile number(countryCode + limit)
-                        2_ userID
-                        3_CountryCode
-                        */
-                            navHostController.navigate(
-                                "${Screen.VerifyOTP.rout}/${countryID}/${countryCode}/${userPhoneNumber}"
-                            )
-                        }
-                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -238,6 +223,24 @@ fun LoginScreen(
                     color = White,
                     fontSize = 18.sp
                 )
+            }
+        }
+
+        when (userLogin) {
+            is Result.Error -> {}
+            Result.Loading -> {}
+            is Result.Success -> {
+                /*
+            Navigate to OTP Screen with
+            1_ user mobile number(countryCode + limit)
+            2_ userID
+            3_CountryCode
+            */
+                LaunchedEffect(key1 = userLogin) {
+                    navHostController.navigate(
+                        "${Screen.VerifyOTP.rout}/${countryID}/${countryCode}/${userPhoneNumber}"
+                    )
+                }
             }
         }
     }
