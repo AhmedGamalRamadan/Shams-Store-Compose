@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import com.ag.projects.data.local.SharedPreferencesManager
 import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.otp.OtpInputField
@@ -67,6 +69,8 @@ fun VerifyOTPScreen(
     var otpCode by remember {
         mutableStateOf("")
     }
+    val context = LocalContext.current
+    val sharedPrefManager = SharedPreferencesManager(context)
 
     Column(
         modifier = Modifier
@@ -199,10 +203,11 @@ fun VerifyOTPScreen(
             is Result.Success -> {
                 val data = (verifyOTPState as Result.Success).data.data
 
+                sharedPrefManager.saveToken(data.token)
                 // if register_complete_step == 2 navigate to login Successful
                 //with userName & Full Phone Number
 
-                LaunchedEffect(key1 = verifyOTPState){
+                LaunchedEffect(key1 = verifyOTPState) {
                     if (data.register_complete_step == 2) {
                         val fullPhoneNumber = data.phone_complete_form
                         val userFullName = data.full_name
