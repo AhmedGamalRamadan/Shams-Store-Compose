@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import com.ag.projects.shamsstorecompose.utils.NavArguments
 
 @Composable
 fun LoginSuccessScreen(
@@ -14,8 +15,8 @@ fun LoginSuccessScreen(
     backStackEntry: NavBackStackEntry
 ) {
 
-    val userName = backStackEntry.arguments?.getString("userName")
-    val userPhoneNumber = backStackEntry.arguments?.getString("fullPhoneNumber")
+    val userName = backStackEntry.arguments?.getString(NavArguments.USER_NAME)
+    val userPhoneNumber = backStackEntry.arguments?.getString(NavArguments.FULL_PHONE_NUMBER)
 
 
     Column(modifier = Modifier.fillMaxSize()) {

@@ -2,6 +2,7 @@ package com.ag.projects.shamsstorecompose.presentation.screen.auth.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -44,15 +45,15 @@ import com.ag.projects.shamsstorecompose.presentation.ui.theme.RegisterBGGrey
 import com.ag.projects.shamsstorecompose.utils.Result
 import com.ag.projects.shamsstorecompose.utils.Screen
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun LoginScreen(
     navHostController: NavHostController,
-    viewModel: LoginScreenViewModel = hiltViewModel()
-) {
+    ) {
 
+    val viewModel: LoginScreenViewModel = hiltViewModel()
     var countryID = 0
-    var countryCode = ""
+    var countryCode = "000"
     var userPhoneNumber by remember {
         mutableStateOf("")
     }
@@ -151,15 +152,17 @@ fun LoginScreen(
                             }
                         }
                     }
+
                 }
 
                 OutlinedTextField(
                     value = userPhoneNumber,
-                    onValueChange = {
-                        userPhoneNumber = it
+                    onValueChange = {phoneNumber->
+                        userPhoneNumber = phoneNumber
                     },
                     modifier = Modifier
                         .fillMaxHeight()
+                        .focusable()
                         .background(White),
                     placeholder = {
                         Text(text = stringResource(id = R.string.mobile_number))
@@ -196,6 +199,7 @@ fun LoginScreen(
 
             Button(
                 onClick = {
+
                     viewModel.login(
                         loginRequest = AuthenticationRequest(
                             country_id = countryID,
@@ -214,12 +218,10 @@ fun LoginScreen(
                         3_CountryCode
                         */
                             navHostController.navigate(
-                                Screen.VerifyOTP.rout + "/$countryID/$countryCode/$userPhoneNumber"
+                                "${Screen.VerifyOTP.rout}/${countryID}/${countryCode}/${userPhoneNumber}"
                             )
-
                         }
                     }
-
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -238,6 +240,5 @@ fun LoginScreen(
                 )
             }
         }
-
     }
 }

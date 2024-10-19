@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import com.ag.projects.shamsstorecompose.utils.NavArguments
 
 @Composable
 fun RegisterUserNameScreen(
@@ -14,8 +15,8 @@ fun RegisterUserNameScreen(
     navBackStackEntry: NavBackStackEntry
 ) {
 
-    val userPhoneNumber =navBackStackEntry.arguments?.getString("userPhoneNumber")
-    val countryId =navBackStackEntry.arguments?.getInt("countryID")
+    val userPhoneNumber =navBackStackEntry.arguments?.getString(NavArguments.USER_PHONE_NUMBER)
+    val countryId =navBackStackEntry.arguments?.getInt(NavArguments.COUNTRY_ID)
 
 
     Column(modifier = Modifier.fillMaxSize()) {

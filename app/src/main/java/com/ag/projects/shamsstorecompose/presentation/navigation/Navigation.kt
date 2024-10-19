@@ -26,6 +26,7 @@ import com.ag.projects.shamsstorecompose.presentation.screen.qa.faq.FAQScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.privacy_policy.PrivacyPolicyScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.settings.SettingsScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.terms_condition.TermsAndConditionScreen
+import com.ag.projects.shamsstorecompose.utils.NavArguments
 import com.ag.projects.shamsstorecompose.utils.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,11 +96,11 @@ fun Navigation(
                 }
 
                 composable(
-                    Screen.VerifyOTP.rout + "/{countryID}/{countryCode}/{userPhoneNumber}",
+                    Screen.VerifyOTP.rout + "/{${NavArguments.COUNTRY_ID}}/{${NavArguments.COUNTRY_CODE}}/{${NavArguments.USER_PHONE_NUMBER}}",
                     arguments = listOf(
-                        navArgument("countryID") { type = NavType.IntType },
-                        navArgument("countryCode") { type = NavType.StringType },
-                        navArgument("userPhoneNumber") { type = NavType.StringType },
+                        navArgument(NavArguments.COUNTRY_ID) { type = NavType.IntType },
+                        navArgument(NavArguments.COUNTRY_CODE) { type = NavType.StringType },
+                        navArgument(NavArguments.USER_PHONE_NUMBER) { type = NavType.StringType },
                     )
                 ) { navBackStackEntry ->
                     VerifyOTPScreen(
@@ -109,10 +110,10 @@ fun Navigation(
                 }
 
                 composable(
-                    Screen.RegisterUserName.rout + "/{userPhoneNumber}/{countryID}",
+                    Screen.RegisterUserName.rout + "/{${NavArguments.USER_PHONE_NUMBER}}/{${NavArguments.COUNTRY_ID}}",
                     arguments = listOf(
-                        navArgument("userPhoneNumber") { type = NavType.StringType },
-                        navArgument("countryID") { type = NavType.IntType },
+                        navArgument(NavArguments.USER_PHONE_NUMBER) { type = NavType.StringType },
+                        navArgument(NavArguments.COUNTRY_ID) { type = NavType.IntType },
                     )
                 ) { navBackStackEntry ->
                     RegisterUserNameScreen(
@@ -122,10 +123,10 @@ fun Navigation(
                 }
 
                 composable(
-                    Screen.LoginSuccess.rout + "/{userName}/{fullPhoneNumber}",
+                    Screen.LoginSuccess.rout + "/{${NavArguments.USER_NAME}}/{${NavArguments.FULL_PHONE_NUMBER}}",
                     arguments = listOf(
-                        navArgument("userName") { type = NavType.StringType },
-                        navArgument("fullPhoneNumber") { type = NavType.StringType }
+                        navArgument(NavArguments.USER_NAME) { type = NavType.StringType },
+                        navArgument(NavArguments.FULL_PHONE_NUMBER) { type = NavType.StringType }
                     )
                 ) { navBackStackEntry ->
                     LoginSuccessScreen(

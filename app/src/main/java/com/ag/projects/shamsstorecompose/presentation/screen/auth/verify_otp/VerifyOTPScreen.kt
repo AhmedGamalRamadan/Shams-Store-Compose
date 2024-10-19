@@ -34,6 +34,7 @@ import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.otp.OtpInputField
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.RegisterBGGrey
+import com.ag.projects.shamsstorecompose.utils.NavArguments
 import com.ag.projects.shamsstorecompose.utils.Result
 import com.ag.projects.shamsstorecompose.utils.Screen
 
@@ -49,12 +50,13 @@ import com.ag.projects.shamsstorecompose.utils.Screen
 fun VerifyOTPScreen(
     navHostController: NavHostController,
     backStackEntry: NavBackStackEntry,
-    viewModel: VerifyOTPScreenViewModel = hiltViewModel()
 ) {
 
-    val countryID = backStackEntry.arguments?.getInt("countryID")
-    val countryCode = backStackEntry.arguments?.getString("countryCode")
-    val userPhoneNumber = backStackEntry.arguments?.getString("userPhoneNumber")
+    val countryID = backStackEntry.arguments?.getInt(NavArguments.COUNTRY_ID)
+    val countryCode = backStackEntry.arguments?.getString(NavArguments.COUNTRY_CODE)
+    val userPhoneNumber = backStackEntry.arguments?.getString(NavArguments.USER_PHONE_NUMBER)
+
+    val viewModel: VerifyOTPScreenViewModel = hiltViewModel()
 
     val verifyOTPState by viewModel.verifyOTPState.collectAsState()
 
