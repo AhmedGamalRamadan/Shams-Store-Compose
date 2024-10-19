@@ -119,8 +119,7 @@ fun RegisterUserNameScreen(
         ) {
 
             Text(
-                text = "+$countryCode$userPhoneNumber",
-                fontWeight = FontWeight.Bold,
+                text = "+$countryCode  $userPhoneNumber",
                 modifier = Modifier
                     .padding(14.dp),
                 fontSize = 28.sp
@@ -152,14 +151,17 @@ fun RegisterUserNameScreen(
 
             Button(
                 onClick = {
-                    viewModel.register(
-                        AuthenticationRequest(
-                            country_id = countryId,
-                            phone = userPhoneNumber,
-                            device_token = Constants.DEVICE_TOKEN,
-                            full_name = registerUserName,
+                    if (registerUserName.isNotBlank()){
+                        viewModel.register(
+                            AuthenticationRequest(
+                                country_id = countryId,
+                                phone = userPhoneNumber,
+                                device_token = Constants.DEVICE_TOKEN,
+                                full_name = registerUserName,
+                            )
                         )
-                    )
+                    }
+
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -180,9 +182,11 @@ fun RegisterUserNameScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
                 text = stringResource(id = R.string.if_a_you_already_have_an_account_please_log_in),
                 color = Color.Black,
-                fontSize = 12.sp,
+                fontSize = 16.sp,
             )
 
             Spacer(modifier = Modifier.height(12.dp))

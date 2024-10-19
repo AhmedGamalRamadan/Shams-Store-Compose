@@ -211,9 +211,8 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 14.dp, end = 14.dp)
-                    .height(48.dp)
-                    .clip(RoundedCornerShape(12.dp)),
-                shape = RoundedCornerShape(14.dp),
+                    .height(48.dp),
+                shape = RoundedCornerShape(8.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = LightGreen
                 )
