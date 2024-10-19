@@ -1,5 +1,6 @@
 package com.ag.projects.shamsstorecompose.presentation.screen.auth.verify_otp
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,24 +38,22 @@ import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.otp.OtpInputField
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.RegisterBGGrey
+import com.ag.projects.shamsstorecompose.utils.Constants
 import com.ag.projects.shamsstorecompose.utils.NavArguments
 import com.ag.projects.shamsstorecompose.utils.Result
 import com.ag.projects.shamsstorecompose.utils.Screen
-
-
-/*
-=> Receive 3 arguments from login screen
- 1_ userMobileNumber(without country code)
- 2_ countryId
- 3_ countryCode
-  */
 
 @Composable
 fun VerifyOTPScreen(
     navHostController: NavHostController,
     backStackEntry: NavBackStackEntry,
 ) {
-
+    /*
+    => Receive 3 arguments from login screen
+     1_ userMobileNumber(without country code)
+     2_ countryId
+     3_ countryCode
+      */
     val countryID = backStackEntry.arguments?.getInt(NavArguments.COUNTRY_ID)
     val countryCode = backStackEntry.arguments?.getString(NavArguments.COUNTRY_CODE)
     val userPhoneNumber = backStackEntry.arguments?.getString(NavArguments.USER_PHONE_NUMBER)
@@ -60,7 +62,9 @@ fun VerifyOTPScreen(
 
     val verifyOTPState by viewModel.verifyOTPState.collectAsState()
 
-    var otpCode = ""
+    var otpCode by remember{
+        mutableStateOf("")
+    }
 
     Column(
         modifier = Modifier
@@ -116,7 +120,6 @@ fun VerifyOTPScreen(
                 )
 
                 Spacer(modifier = Modifier.width(10.dp))
-
             }
         }
 
@@ -157,7 +160,7 @@ fun VerifyOTPScreen(
                             loginRequest = AuthenticationRequest(
                                 country_id = countryID,
                                 phone = userPhoneNumber,
-                                device_token = "",
+                                device_token = Constants.DEVICE_TOKEN,
                                 code = otpCode,
                             )
                         )
@@ -169,6 +172,7 @@ fun VerifyOTPScreen(
                         is Result.Success -> {
                             val data = (verifyOTPState as Result.Success).data.data
 
+                            Log.d("the status is ","Success")
                             // if register_complete_step == 2 navigate to login Successful
                             //with userName & Full Phone Number
                             if (data.register_complete_step == 2) {
