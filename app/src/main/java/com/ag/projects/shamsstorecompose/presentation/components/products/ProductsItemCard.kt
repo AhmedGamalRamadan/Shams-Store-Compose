@@ -162,7 +162,7 @@ fun ProductItemCard(
                         fontWeight = FontWeight.Bold
                     )
 
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { }) {
                         Image(
                             painter = painterResource(id = R.drawable.ic_plus),
                             contentDescription = stringResource(id = R.string.add)

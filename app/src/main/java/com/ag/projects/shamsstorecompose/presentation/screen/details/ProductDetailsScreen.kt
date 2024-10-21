@@ -117,31 +117,35 @@ fun ProductDetailsScreen(
                         for (product in productDetailsContent) {
 
                             //Brand
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Start
-                            ) {
+                            product.brand?.name?.let {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.Start
+                                ) {
 
-                                Text(
-                                    text = stringResource(id = R.string.brand),
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color.Black
-                                )
-                                Spacer(modifier = Modifier.width(5.dp))
+                                    Text(
+                                        text = stringResource(id = R.string.brand),
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.Black
+                                    )
+                                    Spacer(modifier = Modifier.width(5.dp))
 
-                                Text(
-                                    text = product.brand.name,
-                                    color = DarkBlue,
-                                    fontWeight = FontWeight.Bold
-                                )
+                                    Text(
+                                        text = product.brand.name,
+                                        color = DarkBlue,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
                             }
 
                             Spacer(modifier = Modifier.height(7.dp))
 
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = product.name,
-                            )
+                            product.name?.let { name ->
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = name,
+                                )
+                            }
 
                             Spacer(modifier = Modifier.height(7.dp))
 
@@ -232,10 +236,36 @@ fun ProductDetailsScreen(
                         }
                     }
 
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    //Products May U Like
+                    productMayULikeContent?.let {
+
+                        Text(
+                            text = stringResource(R.string.products_may_u_like),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Green
+                        )
+
+                        Spacer(modifier = Modifier.height(7.dp))
+
+                        LazyRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
+                        ) {
+                            items(productMayULikeContent) {
+                                ProductItemCard(
+                                    content = it,
+                                    navHostController = navHostController
+                                )
+                            }
+                        }
+                    }
+
                 }
             }
         }
-
     }
-
 }
