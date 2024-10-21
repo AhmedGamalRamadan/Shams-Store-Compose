@@ -14,7 +14,9 @@ import com.ag.projects.domain.model.qa.tarms_conditon.TermsAndConditionResponse
 import com.ag.projects.domain.utils.Constants
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ProductsAPIServices {
@@ -65,5 +67,14 @@ interface ProductsAPIServices {
     @POST(Constants.REGISTER)
     suspend fun register(@Body registerRequest: AuthenticationRequest): VerifyResponse
 
+
+    @GET("products/{id}")
+    suspend fun getProductsDetails(
+        @Header("Authorization") auth: String? = null,
+        @Path("id") productId: Int,
+        @Query("guest_token") guestToken: String? = null,
+        @Query("lat") lat: Double = Constants.LAT,
+        @Query("lng") lng: Double? = Constants.LNG
+    ): ProductsResponse
 
 }

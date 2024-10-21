@@ -56,4 +56,15 @@ class ProductsRepositoryImpl(
 
     override suspend fun register(registerRequest: AuthenticationRequest): VerifyResponse =
         productsAPIServices.register(registerRequest)
+
+    override suspend fun getProductsDetails(
+        auth: String?,
+        productId: Int,
+        guestToken: String?,
+        lat: Double,
+        lng: Double
+    ): ProductsResponse = productsAPIServices.getProductsDetails(productId = productId)
+
+
+
 }

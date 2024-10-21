@@ -11,6 +11,7 @@ import com.ag.projects.domain.model.qa.contact_us.ContactUsResponse
 import com.ag.projects.domain.model.qa.faq.FAQResponse
 import com.ag.projects.domain.model.qa.policy.PolicyDataResponse
 import com.ag.projects.domain.model.qa.tarms_conditon.TermsAndConditionResponse
+import com.ag.projects.domain.utils.Constants
 
 interface ProductsRepository {
 
@@ -40,4 +41,11 @@ interface ProductsRepository {
 
     suspend fun register(registerRequest: AuthenticationRequest): VerifyResponse
 
+    suspend fun getProductsDetails(
+        auth: String? = null,
+        productId: Int,
+        guestToken: String? = null,
+        lat: Double = Constants.LAT,
+        lng: Double = Constants.LNG
+    ): ProductsResponse
 }
