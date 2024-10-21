@@ -53,7 +53,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @Composable
 fun HomeScreen(
     navHostController: NavHostController,
-    address:String
+    address: String
 ) {
 
     val viewModel: HomeViewModel = hiltViewModel()
@@ -223,7 +223,10 @@ fun HomeScreen(
                                     .height(300.dp)
                             ) {
                                 items(popularProductContent) {
-                                    ProductItemCard(content = it)
+                                    ProductItemCard(
+                                        content = it,
+                                        navHostController = navHostController
+                                    )
                                 }
                             }
                         }

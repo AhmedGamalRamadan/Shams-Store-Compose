@@ -2,6 +2,7 @@ package com.ag.projects.shamsstorecompose.presentation.components.products
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -17,21 +18,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.ag.projects.domain.model.products.home.Content
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Red
+import com.ag.projects.shamsstorecompose.utils.Screen
 
 @Composable
 fun ProductItemCard(
     modifier: Modifier = Modifier,
-    content: Content
+    content: Content,
+    navHostController: NavHostController,
 ) {
     Card(
         modifier = modifier
             .width(200.dp)
             .height(300.dp)
-            .padding(7.dp),
+            .padding(7.dp)
+            .clickable {
+                navHostController.navigate(Screen.Details.rout + "/${content.id}")
+            },
         colors = CardDefaults.cardColors(
             containerColor = White
         ),
@@ -151,8 +158,10 @@ fun ProductItemCard(
                     )
 
                     IconButton(onClick = { /*TODO*/ }) {
-                        Image(painter = painterResource(id = R.drawable.ic_plus),
-                            contentDescription = stringResource(id = R.string.add))
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_plus),
+                            contentDescription = stringResource(id = R.string.add)
+                        )
                     }
 
                 }

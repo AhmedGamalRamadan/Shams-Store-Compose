@@ -5,6 +5,8 @@ import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
 import com.ag.projects.domain.model.country.AllCountriesResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
+import com.ag.projects.domain.model.products.cart.AddToCartRequest
+import com.ag.projects.domain.model.products.cart.response.ShoppingCartResponse
 import com.ag.projects.domain.model.products.home.ProductsResponse
 import com.ag.projects.domain.model.qa.about.AboutResponse
 import com.ag.projects.domain.model.qa.contact_us.ContactUsResponse
@@ -13,6 +15,7 @@ import com.ag.projects.domain.model.qa.policy.PolicyDataResponse
 import com.ag.projects.domain.model.qa.tarms_conditon.TermsAndConditionResponse
 import com.ag.projects.domain.utils.Constants
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -77,4 +80,44 @@ interface ProductsAPIServices {
         @Query("lng") lng: Double? = Constants.LNG
     ): ProductsResponse
 
+    /*
+    Shopping Cart
+     */
+
+    @GET(Constants.CARTS)
+    suspend fun getCarts(
+        @Header("Authorization") bearerToken: String?,
+        @Query("guest_token") guestToken: String? = null,
+        @Query("lat") lat: Double = Constants.LAT,
+        @Query("lng") lng: Double = Constants.LNG,
+        @Query("address_id") addressId: Int? = null,
+        @Query("is_picked") isPicked: Int? = null,
+        @Query("branch_work_time_id") branchWorkTimeId: Int? = null
+    ): ShoppingCartResponse
+
+    @POST(Constants.CARTS)
+    suspend fun addToCarts(
+        @Header("Authorization") bearerToken: String?,
+        @Query("guest_token") guestToken: String? = null,
+        @Query("lat") lat: Double = Constants.LAT,
+        @Query("lng") lng: Double = Constants.LNG,
+        @Body addToCartRequest: AddToCartRequest,
+    ): ShoppingCartResponse
+
+    @DELETE(Constants.CARTS)
+    suspend fun deleteAllCarts(
+        @Header("Authorization") bearerToken: String?,
+        @Query("guest_token") guestToken: String? = null,
+        @Query("lat") lat: Double = Constants.LAT,
+        @Query("lng") lng: Double = Constants.LNG,
+    ): ShoppingCartResponse
+
+    @DELETE("carts/item/{itemId}")
+    suspend fun deleteCartItem(
+        @Header("Authorization") bearerToken: String?,
+        @Path("itemId") itemId: Int,
+        @Query("guest_token") guestToken: String? = null,
+        @Query("lat") lat: Double = Constants.LAT,
+        @Query("lng") lng: Double = Constants.LNG,
+    ): ShoppingCartResponse
 }

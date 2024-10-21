@@ -48,4 +48,6 @@ object Constants {
     const val DEVICE_TOKE = "device_token"
     const val GUEST_TOKEN = "guest_token"
     const val TYPE = "type"
+
+    const val CARTS = "carts"
 }
