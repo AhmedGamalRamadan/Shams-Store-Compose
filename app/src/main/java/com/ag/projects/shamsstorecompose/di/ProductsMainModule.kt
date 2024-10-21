@@ -6,6 +6,7 @@ import com.ag.projects.domain.repository.ProductsRepository
 import com.ag.projects.domain.usecase.auth.login.LoginUseCase
 import com.ag.projects.domain.usecase.auth.register.RegisterUseCase
 import com.ag.projects.domain.usecase.auth.verify.VerifyUSeCase
+import com.ag.projects.domain.usecase.details.GetProductDetailsUseCase
 import com.ag.projects.domain.usecase.products.GetProductsUseCase
 import com.ag.projects.domain.utils.Constants
 import dagger.Module
@@ -78,6 +79,11 @@ object ProductsMainModule {
     @Singleton
     fun provideProductsUseCase(productsRepository: ProductsRepository) =
         GetProductsUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideProductDetailsUseCase(productsRepository: ProductsRepository) =
+        GetProductDetailsUseCase(productsRepository)
 
     /*
     Auth

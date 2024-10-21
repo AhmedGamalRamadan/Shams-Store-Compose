@@ -22,6 +22,7 @@ import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart.Car
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.category.CategoryScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.home.HomeScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.info.InfoScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.details.ProductDetailsScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.faq.FAQScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.privacy_policy.PrivacyPolicyScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.qa.settings.SettingsScreen
@@ -136,6 +137,16 @@ fun Navigation(
                     )
                 }
 
+                composable(Screen.Details.rout + "/{${NavArguments.PRODUCT_ID}}",
+                    arguments = listOf(
+                        navArgument(NavArguments.PRODUCT_ID) { type = NavType.IntType }
+                    )
+                ) { navBackStackEntry ->
+                    ProductDetailsScreen(
+                        navHostController = navController,
+                        backStackEntry = navBackStackEntry
+                    )
+                }
             }
         }
     }

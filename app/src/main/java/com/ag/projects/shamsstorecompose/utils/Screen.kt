@@ -16,4 +16,6 @@ sealed class Screen(val rout: String) {
     object VerifyOTP : Screen("otp")
     object RegisterUserName : Screen("register")
     object LoginSuccess : Screen("loginSuccess")
+
+    object Details : Screen("details")
 }
