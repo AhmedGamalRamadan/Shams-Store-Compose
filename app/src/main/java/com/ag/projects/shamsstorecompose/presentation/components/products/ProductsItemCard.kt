@@ -7,9 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
@@ -24,7 +28,6 @@ import coil.compose.AsyncImage
 import com.ag.projects.domain.model.products.home.Content
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Grey
-import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Red
 import com.ag.projects.shamsstorecompose.utils.Screen
 
@@ -34,6 +37,15 @@ fun ProductItemCard(
     content: Content,
     navHostController: NavHostController,
 ) {
+
+    var isFavorite by remember {
+        mutableStateOf(false)
+    }
+    var productQuantity by remember {
+        mutableIntStateOf(1)
+    }
+
+
     Card(
         modifier = modifier
             .width(200.dp)
@@ -58,23 +70,28 @@ fun ProductItemCard(
                 modifier = modifier.fillMaxWidth(),
                 contentAlignment = Alignment.TopStart
             ) {
-                Card(
-                    modifier = modifier.wrapContentSize(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Red
-                    ),
-                    shape = RoundedCornerShape(3.dp)
-                ) {
-                    Text(
-                        text = "20% Sale",
-                        color = White,
-                        fontSize = 12.sp,
-                        modifier = Modifier.padding(2.dp)
-                    )
+
+                content.percentage?.let {
+                    Card(
+                        modifier = modifier.wrapContentSize(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Red
+                        ),
+                        shape = RoundedCornerShape(3.dp)
+                    ) {
+                        Text(
+                            text = "$it% Sale",
+                            color = White,
+                            fontSize = 12.sp,
+                            modifier = Modifier.padding(2.dp)
+                        )
+                    }
                 }
 
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        isFavorite = !isFavorite
+                    },
                     modifier = modifier
                         .size(24.dp)
                         .align(Alignment.TopEnd),
@@ -82,10 +99,17 @@ fun ProductItemCard(
                         containerColor = White
                     ),
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_favorite_not_selected),
-                        contentDescription = stringResource(id = R.string.favorite)
-                    )
+                    if (isFavorite) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_favorite_selected),
+                            contentDescription = "Favorite"
+                        )
+                    } else {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_favorite_not_selected),
+                            contentDescription = "Favorite"
+                        )
+                    }
                 }
             }
 
@@ -149,7 +173,13 @@ fun ProductItemCard(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(onClick = { }) {
+                    IconButton(
+                        onClick = {
+                            if (productQuantity > 1) {
+                                productQuantity--
+                            }
+                        }
+                    ) {
                         Image(
                             painter = painterResource(id = R.drawable.ic_minus),
                             contentDescription = stringResource(id = R.string.minus)
@@ -157,12 +187,15 @@ fun ProductItemCard(
                     }
 
                     Text(
-                        text = "10",
+                        text = "$productQuantity",
                         modifier = modifier.padding(horizontal = 8.dp),
                         fontWeight = FontWeight.Bold
                     )
 
-                    IconButton(onClick = { }) {
+                    IconButton(
+                        onClick = {
+                            productQuantity++
+                        }) {
                         Image(
                             painter = painterResource(id = R.drawable.ic_plus),
                             contentDescription = stringResource(id = R.string.add)
