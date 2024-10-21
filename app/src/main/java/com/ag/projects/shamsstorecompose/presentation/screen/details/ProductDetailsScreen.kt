@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -32,8 +34,10 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
+import com.ag.projects.shamsstorecompose.presentation.components.products.ProductItemCard
 import com.ag.projects.shamsstorecompose.presentation.components.products.slider.ViewPagerSliderItem
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.DarkBlue
+import com.ag.projects.shamsstorecompose.presentation.ui.theme.Green
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Grey
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.utils.Constants
@@ -164,7 +168,6 @@ fun ProductDetailsScreen(
                                     color = LightGreen,
                                     fontSize = 20.sp
                                 )
-
                             }
 
                             Spacer(modifier = Modifier.height(7.dp))
@@ -202,6 +205,32 @@ fun ProductDetailsScreen(
                         }
                     }
 
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    //Related Products
+                    relatedProductsContent?.let {
+                        Text(
+                            text = stringResource(id = R.string.related_products),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Green
+                        )
+
+                        Spacer(modifier = Modifier.height(7.dp))
+                        LazyRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
+                        ) {
+                            items(relatedProductsContent) {
+                                ProductItemCard(
+                                    content = it,
+                                    navHostController = navHostController
+                                )
+                            }
+
+                        }
+                    }
 
                 }
             }

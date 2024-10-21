@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -22,6 +23,8 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.ag.projects.domain.model.products.home.Content
 import com.ag.projects.shamsstorecompose.R
+import com.ag.projects.shamsstorecompose.presentation.ui.theme.Grey
+import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Red
 import com.ag.projects.shamsstorecompose.utils.Screen
 
@@ -111,21 +114,23 @@ fun ProductItemCard(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
             ) {
-                content.total_price?.let {
+
+                content.price_after?.let {
                     Text(
-                        text = it.toString(),
-                        fontWeight = FontWeight.Bold
+                        text = "${content.price_after} ${content.currency}",
+                        color = Black,
                     )
-                }
-                Spacer(modifier = modifier.width(5.dp))
-                content.price?.let {
                     Text(
-                        text = it.toString(),
-                        color = Color.DarkGray,
+                        modifier = Modifier
+                            .padding(6.dp),
                         textDecoration = TextDecoration.LineThrough,
-                        modifier = modifier.padding(start = 7.dp)
+                        text = content.price.toString(),
+                        color = Grey
                     )
-                }
+                } ?: Text(
+                    text = "${content.price} ${content.currency}",
+                    fontWeight = FontWeight.Bold
+                )
             }
 
             Row(
