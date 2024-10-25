@@ -6,6 +6,8 @@ import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
 import com.ag.projects.domain.model.country.AllCountriesResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
+import com.ag.projects.domain.model.products.cart.AddToCartRequest
+import com.ag.projects.domain.model.products.cart.response.ShoppingCartResponse
 import com.ag.projects.domain.model.products.home.ProductsResponse
 import com.ag.projects.domain.model.qa.about.AboutResponse
 import com.ag.projects.domain.model.qa.contact_us.ContactUsResponse
@@ -65,6 +67,66 @@ class ProductsRepositoryImpl(
         lng: Double
     ): ProductsResponse = productsAPIServices.getProductsDetails(productId = productId)
 
+    /*
+    Shopping cart
+     */
 
+    override suspend fun getCarts(
+        bearerToken: String?,
+        guestToken: String?,
+        lat: Double,
+        lng: Double,
+        addressId: Int?,
+        isPicked: Int?,
+        branchWorkTimeId: Int?
+    ): ShoppingCartResponse = productsAPIServices.getCarts(
+        bearerToken,
+        guestToken,
+        lat,
+        lng,
+        addressId,
+        isPicked,
+        branchWorkTimeId
+    )
+
+    override suspend fun addToCarts(
+        bearerToken: String?,
+        guestToken: String?,
+        lat: Double,
+        lng: Double,
+        addToCartRequest: AddToCartRequest
+    ): ShoppingCartResponse = productsAPIServices.addToCarts(
+        bearerToken = bearerToken,
+        guestToken = guestToken,
+        lat = lat,
+        lng = lng,
+        addToCartRequest = addToCartRequest
+    )
+
+    override suspend fun deleteAllCarts(
+        bearerToken: String?,
+        guestToken: String?,
+        lat: Double,
+        lng: Double
+    ): ShoppingCartResponse = productsAPIServices.deleteAllCarts(
+        bearerToken = bearerToken,
+        guestToken = guestToken,
+        lat = lat,
+        lng = lng
+    )
+
+    override suspend fun deleteCartItem(
+        bearerToken: String?,
+        itemId: Int,
+        guestToken: String?,
+        lat: Double,
+        lng: Double
+    ): ShoppingCartResponse = productsAPIServices.deleteCartItem(
+        bearerToken = bearerToken,
+        itemId = itemId,
+        guestToken = guestToken,
+        lat = lat,
+        lng = lng
+    )
 
 }

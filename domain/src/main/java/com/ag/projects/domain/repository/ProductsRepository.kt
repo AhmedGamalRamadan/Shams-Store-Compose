@@ -5,6 +5,8 @@ import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
 import com.ag.projects.domain.model.country.AllCountriesResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
+import com.ag.projects.domain.model.products.cart.AddToCartRequest
+import com.ag.projects.domain.model.products.cart.response.ShoppingCartResponse
 import com.ag.projects.domain.model.products.home.ProductsResponse
 import com.ag.projects.domain.model.qa.about.AboutResponse
 import com.ag.projects.domain.model.qa.contact_us.ContactUsResponse
@@ -48,4 +50,41 @@ interface ProductsRepository {
         lat: Double = Constants.LAT,
         lng: Double = Constants.LNG
     ): ProductsResponse
+
+    /*
+    Shopping cart
+     */
+    suspend fun getCarts(
+        bearerToken: String?,
+        guestToken: String? = null,
+        lat: Double = Constants.LAT,
+        lng: Double = Constants.LNG,
+        addressId: Int? = null,
+        isPicked: Int? = null,
+        branchWorkTimeId: Int? = null
+    ): ShoppingCartResponse
+
+    suspend fun addToCarts(
+        bearerToken: String?,
+        guestToken: String?,
+        lat: Double = Constants.LAT,
+        lng: Double = Constants.LNG,
+        addToCartRequest: AddToCartRequest,
+    ): ShoppingCartResponse
+
+    suspend fun deleteAllCarts(
+        bearerToken: String?,
+        guestToken: String?,
+        lat: Double = Constants.LAT,
+        lng: Double = Constants.LNG,
+    ): ShoppingCartResponse
+
+    suspend fun deleteCartItem(
+        bearerToken: String?,
+        itemId: Int,
+        guestToken: String?,
+        lat: Double = Constants.LAT,
+        lng: Double = Constants.LNG,
+    ): ShoppingCartResponse
+
 }
