@@ -31,9 +31,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ag.projects.data.local.SharedPreferencesManager
+import com.ag.projects.domain.model.products.cart.AddToCartRequest
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 import com.ag.projects.shamsstorecompose.presentation.components.products.slider.ShoppingCartItem
+import com.ag.projects.shamsstorecompose.presentation.ui.theme.Green
 import com.ag.projects.shamsstorecompose.utils.Result
 
 @Composable
@@ -95,7 +97,24 @@ fun CartScreen(
                             items(cart.items) { productItem ->
 
                                 ShoppingCartItem(
-                                    productItem = productItem
+                                    productItem = productItem,
+                                    deleteItem = { productId ->
+                                        viewModel.deleteCartItem(
+                                            bearerToken = "Bearer ${sharedPrefManager.getToken()}",
+                                            productId = productId,
+                                            guestToken = ""
+                                        )
+                                    },
+                                    addItem = { productId, productQuantity ->
+                                        viewModel.addToCart(
+                                            bearerToken = "Bearer ${sharedPrefManager.getToken()}",
+                                            guestToken = "",
+                                            addToCartRequest = AddToCartRequest(
+                                                product_id = productId,
+                                                quantity = productQuantity
+                                            )
+                                        )
+                                    }
                                 )
                             }
                         }
@@ -109,7 +128,8 @@ fun CartScreen(
                                 text = stringResource(id = R.string.shopping_cart_is_empty),
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Center,
-                                fontSize = 33.sp
+                                fontSize = 23.sp,
+                                color = Green
                             )
                         }
                     }

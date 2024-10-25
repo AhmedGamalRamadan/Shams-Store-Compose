@@ -43,7 +43,7 @@ fun ShoppingCartItem(
     ) {
 
     var productQuantity by remember {
-        mutableIntStateOf(1)
+        mutableIntStateOf(productItem.quantity)
     }
 
 
@@ -123,6 +123,7 @@ fun ShoppingCartItem(
                     onClick = {
                         // call add
                         if (productItem.quantity > 1) {
+                            productQuantity -= 1
                             addItem?.invoke(productItem.product_detail.id, --productItem.quantity)
                         } else {
                             deleteItem?.invoke(productItem.id)
@@ -136,13 +137,14 @@ fun ShoppingCartItem(
                 }
 
                 Text(
-                    text = "${productItem.quantity}",
+                    text = "$productQuantity",
                     modifier = modifier.padding(horizontal = 8.dp),
                     fontWeight = FontWeight.Bold
                 )
 
                 IconButton(
                     onClick = {
+                        productQuantity += 1
                         addItem?.invoke(productItem.product_detail.id, ++productItem.quantity)
                     }
                 ) {
@@ -153,7 +155,9 @@ fun ShoppingCartItem(
                 }
 
                 IconButton(
-                    onClick = { },
+                    onClick = {
+                        deleteItem?.invoke(productItem.id)
+                    },
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_delete),

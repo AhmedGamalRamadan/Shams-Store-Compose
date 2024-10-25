@@ -132,3 +132,25 @@ class CartScreenViewModel @Inject constructor(
     }
 
 }
+/*
+private suspend fun <T> handleRequest(request: suspend () -> T, state: MutableStateFlow<Result<T>>) {
+    try {
+        state.emit(Result.Success(request()))
+    } catch (networkException: IOException) {
+        state.emit(Result.Error("Network error", networkException))
+    } catch (jsonException: JsonParseException) {
+        state.emit(Result.Error("Data parsing error", jsonException))
+    } catch (e: Exception) {
+        state.emit(Result.Error("Unexpected error", e))
+    }
+}
+
+fun addToCart(...) {
+    viewModelScope.launch {
+        handleRequest({
+            addToCartUseCase.addToCarts(bearerToken, guestToken, addToCartRequest)
+        }, _addToCartState)
+    }
+}
+
+ */
