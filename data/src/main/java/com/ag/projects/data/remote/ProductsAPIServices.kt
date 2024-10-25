@@ -61,6 +61,9 @@ interface ProductsAPIServices {
     @GET(Constants.GET_COUNTRIES)
     suspend fun getAllCountries(): AllCountriesResponse
 
+    /*
+    Auth
+     */
     @POST(Constants.LOGIN)
     suspend fun login(@Body loginRequest: AuthenticationRequest): LoginResponse
 
@@ -70,7 +73,9 @@ interface ProductsAPIServices {
     @POST(Constants.REGISTER)
     suspend fun register(@Body registerRequest: AuthenticationRequest): VerifyResponse
 
-
+    /*
+    Product Details
+     */
     @GET("products/{id}")
     suspend fun getProductsDetails(
         @Header("Authorization") auth: String? = null,

@@ -36,6 +36,7 @@ fun ProductItemCard(
     modifier: Modifier = Modifier,
     content: Content,
     navHostController: NavHostController,
+    addToCart:((Int,Int)->Unit)?=null
 ) {
 
     var isFavorite by remember {
@@ -163,7 +164,9 @@ fun ProductItemCard(
                     .padding(top = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = {
+                    addToCart?.invoke(content.id,productQuantity)
+                }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_cart_available),
                         contentDescription = stringResource(id = R.string.shoppingcart)
