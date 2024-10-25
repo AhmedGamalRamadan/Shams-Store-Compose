@@ -137,4 +137,5 @@
     <string name="resend_code">Resend Code</string>
     <string name="products_may_u_like">Products May U Like</string>
     <string name="delete">Delete</string>
+    <string name="shopping_cart_is_empty">Shopping Cart Is Empty</string>
 </resources>

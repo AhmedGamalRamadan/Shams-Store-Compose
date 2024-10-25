@@ -20,6 +20,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.ag.projects.data.local.SharedPreferencesManager
+import com.ag.projects.domain.model.products.cart.AddToCartRequest
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.products.BrandsItemCard
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
@@ -60,6 +63,8 @@ fun HomeScreen(
     val allProductsState by viewModel.allProducts.collectAsState()
     val context = LocalContext.current
 
+    val sharedPrefManager = SharedPreferencesManager(context)
+
     var textSearchState by remember {
         mutableStateOf("")
     }
@@ -79,7 +84,7 @@ fun HomeScreen(
             screenName = "",
             onBackClick = {},
             changeLocation = stringResource(id = R.string.change),
-            address = address.toString()
+            address = address
         )
 
         Column(
@@ -225,7 +230,18 @@ fun HomeScreen(
                                 items(popularProductContent) {
                                     ProductItemCard(
                                         content = it,
-                                        navHostController = navHostController
+                                        navHostController = navHostController,
+                                        addToCart = { productId, productQuantity ->
+
+                                            viewModel.addToCart(
+                                                bearerToken = "Bearer ${sharedPrefManager.getToken()}",
+                                                guestToken = null,
+                                                addToCartRequest = AddToCartRequest(
+                                                    product_id = productId,
+                                                    quantity = productQuantity
+                                                )
+                                            )
+                                        }
                                     )
                                 }
                             }
@@ -235,4 +251,5 @@ fun HomeScreen(
             }
         }
     }
+
 }

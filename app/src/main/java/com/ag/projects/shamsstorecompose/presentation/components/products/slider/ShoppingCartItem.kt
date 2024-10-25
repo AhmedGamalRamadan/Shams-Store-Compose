@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -39,97 +41,104 @@ fun ShoppingCartItem(
         mutableIntStateOf(1)
     }
 
-    Row(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .height(230.dp)
+            .height(160.dp),
     ) {
 
-        AsyncImage(
+        Row(
             modifier = modifier
-                .size(120.dp),
-            model = productItem.product_detail.image,
-            contentDescription = productItem.product_detail.desc
-        )
-
-        Spacer(modifier = modifier.width(7.dp))
-
-        Column {
-            Text(
-                text = productItem.product_detail.name,
-                color = Color.Green,
-                fontWeight = FontWeight.Bold
-            )
-            Text(text = productItem.product_detail.desc)
-
-            //Price
+                .fillMaxWidth()
+        ) {
             Row {
-                productItem.product_detail.price_after?.let {
+                AsyncImage(
+                    modifier = modifier
+                        .size(80.dp),
+                    model = productItem.product_detail.image,
+                    contentDescription = productItem.product_detail.desc
+                )
+
+                Spacer(modifier = modifier.width(3.dp))
+
+                Column(
+                    modifier = modifier
+                        .fillMaxHeight()
+                ) {
                     Text(
-                        text =
-                        productItem.product_detail.price_after.toString() + productItem.product_detail.currency,
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold
+                        text = productItem.product_detail.name,
+                        color = Color.Green,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1
                     )
-                    Text(
-                        text = productItem.product_detail.price.toString(),
-                        color = Grey
-                    )
-                } ?: run {
-                    Text(
-                        text = productItem.product_detail.price.toString() + productItem.product_detail.currency,
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Text(text = productItem.product_detail.desc, maxLines = 1)
+
+                    Spacer(modifier = modifier.height(5.dp))
+
+                    //Price
+                    Row {
+                        productItem.product_detail.price_after?.let {
+                            Text(
+                                text =
+                                productItem.product_detail.price_after.toString() + productItem.product_detail.currency,
+                                color = Color.Black,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = productItem.product_detail.price.toString(),
+                                color = Grey
+                            )
+                        } ?: run {
+                            Text(
+                                text = productItem.product_detail.price.toString() + " " + productItem.product_detail.currency,
+                                color = Color.Black,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                    }
                 }
+
+
+                Image(
+
+                    painter = painterResource(id = R.drawable.ic_delete),
+                    contentDescription = stringResource(id = R.string.delete)
+                )
 
             }
         }
 
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
-
-                painter = painterResource(id = R.drawable.ic_delete),
-                contentDescription = stringResource(id = R.string.delete)
-            )
-
             Row(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                verticalAlignment = Alignment.CenterVertically
             ) {
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
+                IconButton(
+                    onClick = {}
                 ) {
-                    IconButton(
-                        onClick = {}
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_minus),
-                            contentDescription = stringResource(id = R.string.minus)
-                        )
-                    }
-
-                    Text(
-                        text = "$productQuantity",
-                        modifier = modifier.padding(horizontal = 8.dp),
-                        fontWeight = FontWeight.Bold
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_minus),
+                        contentDescription = stringResource(id = R.string.minus)
                     )
-
-                    IconButton(
-                        onClick = {}
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_plus),
-                            contentDescription = stringResource(id = R.string.add)
-                        )
-                    }
-
                 }
+
+                Text(
+                    text = "$productQuantity",
+                    modifier = modifier.padding(horizontal = 8.dp),
+                    fontWeight = FontWeight.Bold
+                )
+
+                IconButton(
+                    onClick = {}
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_plus),
+                        contentDescription = stringResource(id = R.string.add)
+                    )
+                }
+
             }
         }
 
