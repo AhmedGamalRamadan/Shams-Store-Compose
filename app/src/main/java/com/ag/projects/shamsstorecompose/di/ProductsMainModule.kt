@@ -6,6 +6,10 @@ import com.ag.projects.domain.repository.ProductsRepository
 import com.ag.projects.domain.usecase.auth.login.LoginUseCase
 import com.ag.projects.domain.usecase.auth.register.RegisterUseCase
 import com.ag.projects.domain.usecase.auth.verify.VerifyUSeCase
+import com.ag.projects.domain.usecase.cart.add.AddToCartUseCase
+import com.ag.projects.domain.usecase.cart.delete.DeleteAllCartsUseCase
+import com.ag.projects.domain.usecase.cart.delete.DeleteCartItemUseCase
+import com.ag.projects.domain.usecase.cart.get.GetShoppingCartUseCase
 import com.ag.projects.domain.usecase.details.GetProductDetailsUseCase
 import com.ag.projects.domain.usecase.products.GetProductsUseCase
 import com.ag.projects.domain.utils.Constants
@@ -103,4 +107,30 @@ object ProductsMainModule {
     @Singleton
     fun provideVerifyOTPUseCase(productsRepository: ProductsRepository) =
         VerifyUSeCase(productsRepository)
+
+    /*
+    Shopping cart
+     */
+
+    @Provides
+    @Singleton
+    fun provideGetCartsUseCase(productsRepository: ProductsRepository) =
+        GetShoppingCartUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideAddToCartsUseCase(productsRepository: ProductsRepository) =
+        AddToCartUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteAllCartsUseCase(productsRepository: ProductsRepository) =
+        DeleteAllCartsUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteCartItemUseCase(productsRepository: ProductsRepository) =
+        DeleteCartItemUseCase(productsRepository)
+
+
 }
