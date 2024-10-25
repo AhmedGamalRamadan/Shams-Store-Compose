@@ -3,20 +3,30 @@ package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.cart
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.ag.projects.data.local.SharedPreferencesManager
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
+import com.ag.projects.shamsstorecompose.presentation.components.products.ProductItemCard
+import com.ag.projects.shamsstorecompose.presentation.components.products.slider.ShoppingCartItem
+import com.ag.projects.shamsstorecompose.utils.Result
 
 @Composable
 fun CartScreen(
@@ -28,10 +38,26 @@ fun CartScreen(
         mutableStateOf("")
     }
 
+    val context = LocalContext.current
+    val sharedPrefManager = SharedPreferencesManager(context)
+
+    val viewModel: CartScreenViewModel = hiltViewModel()
+    val carts by viewModel.getCartItems.collectAsState()
+
+    LaunchedEffect(key1 = carts) {
+
+        viewModel.getCarts(
+            bearerToken = "Bearer ${sharedPrefManager.getToken()}",
+            addressId = 1,
+            isPicked = 2,
+            branchWorkTimeId = 1
+        )
+
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+//            .verticalScroll(rememberScrollState())
     ) {
 
         CommonHeader(
@@ -51,6 +77,28 @@ fun CartScreen(
                 .padding(12.dp)
         ) {
 
+
+            when (carts) {
+                is Result.Error -> {}
+                Result.Loading -> {}
+                is Result.Success -> {
+
+                    (carts as Result.Success).data.data.cart?.let { cart ->
+
+                        LazyColumn {
+                            items(cart.items) { productItem ->
+
+                                ShoppingCartItem(
+                                    productItem = productItem
+                                )
+                            }
+                        }
+                    }?:run{
+
+                    }
+
+                }
+            }
 
         }
     }

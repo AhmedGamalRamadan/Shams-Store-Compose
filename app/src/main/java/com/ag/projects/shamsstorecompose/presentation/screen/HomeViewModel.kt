@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
 import com.ag.projects.domain.model.products.home.ProductsResponse
+import com.ag.projects.domain.usecase.cart.add.AddToCartUseCase
 import com.ag.projects.domain.usecase.products.GetProductsUseCase
 import com.google.gson.JsonParseException
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,8 @@ import com.ag.projects.shamsstorecompose.utils.Result
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val productsUseCase: GetProductsUseCase
+    private val productsUseCase: GetProductsUseCase,
+    private val addToCartUseCase: AddToCartUseCase,
 ) : ViewModel() {
 
     private val _allProducts =

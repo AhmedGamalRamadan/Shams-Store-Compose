@@ -7,7 +7,7 @@ data class ProductDetail(
     val currency: String,
     val desc: String,
     val id: Int,
-    val image: Any,
+    val image: String,
     val in_cart: Boolean,
     val in_cart_count: Int,
     val is_express: Boolean,
