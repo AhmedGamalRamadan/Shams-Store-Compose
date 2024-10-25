@@ -3,8 +3,8 @@
     <string name="app_name">ShamsStoreCompose</string>
     <string name="add">Add</string>
     <string name="minus">Minus</string>
-    <string name="search">Search....</string>
-    <string name="back">back</string>
+    <string name="search">البحث......</string>
+    <string name="back">الرجوع</string>
     <string name="loading">تحميل .....</string>
     <string name="error_happen">حدث خطأ</string>
     <string name="no_internet_connection">لا يوجد اتصال بالإنترنت</string>
@@ -37,6 +37,8 @@
     <string name="contact_us">اتصل بنا</string>
     <string name="legal">قانوني</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="delete">Delete</string>
+    <string name="shopping_cart_is_empty">سله التسوق فارغه</string>
     <string name="vat_number">رقم ضريبة القيمة المضافة</string>
     <string name="terms_conditions">الشروط والأحكام</string>
     <string name="profile">ملف تعريف</string>
@@ -105,7 +107,6 @@
     <string name="enter_received_code">أدخل الرمز</string>
     <string name="verify">التحقق</string>
     <string name="resend_code_00_59">إعادة إرسال الكود: 00:59</string>
-
     <string name="please_enter_your_password_to_create_your_new_account">الرجاء إدخال كلمة المرور الخاصة بك لإنشاء حسابك الجديد.</string>
     <string name="password">كلمه المرور</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
@@ -132,10 +133,45 @@
     <string name="male">ذكر</string>
     <string name="female">أنثى</string>
     <string name="nationality">جنسية</string>
-    <string name="do_you_want_to_remove_this_item_from_favorites">Do you want to remove \n this item from Favorites?</string>
+    <string name="do_you_want_to_remove_this_item_from_favorites">هل تريد إزالة هذا العنصر من المفضلة</string>
     <string name="do_you_want_to_see_this_message_again">Do you want to see this message again?</string>
     <string name="remove">حزف</string>
     <string name="resend_code">اعاده ارسال الكود</string>
+    <string name="cart_is_empty">سلة التسوق فارغة</string>
+    <string name="there_is_not_any_products_in_cart_recently">لا يوجد أي منتج في سلة التسوق مؤخراً…</string>
+    <string name="you_did_not_add_any_products_to_the_cart_yet_start_adding_products_in_your_cart_and_order_now">لم تقم بإضافة أي منتجات إلى سلة التسوق بعد، ابدأ بإضافة المنتجات إلى سلة التسوق الخاصة بك واطلبها الآن…</string>
+    <string name="there_is_not_any_favorites">لا يوجد أي المفضلة…</string>
+    <string name="you_did_not_add_any_favorites_yet_start_adding_your_favorite_products_to_buy_them_at_any_time_easily">لم تقم بإضافة أي مفضلة بعد. ابدأ بإضافة منتجاتك المفضلة لشرائها في أي وقت بسهولة…</string>
+    <string name="add_products">أضف المنتجات</string>
+    <string name="add_to_cart">أضف إلى عربة التسوق |</string>
+    <string name="can_not_add_this_product">لا يمكن إضافة هذا المنتج</string>
+    <string name="product_added_successfully">تمت إضافة المنتج بنجاح</string>
+    <string name="continue_to_checkout">متابعة</string>
+    <string name="total">المجموع:</string>
+    <string name="items">أغراض:</string>
+    <string name="total_price_may_vary_due_to_weighted_items_products_or_sale_price_changes_by_the_store_while_processing_the_order">قد يختلف السعر الإجمالي بسبب العناصر المرجحة أو المنتجات أو تغيرات أسعار البيع من قبل المتجر أثناء معالجة الطلب.</string>
+    <string name="delivery_address">عنوان التسليم</string>
+    <string name="default_address">120 شارع المطار، الوادي، الرياض 15021، المملكة العربية السعودية.</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="wallet">محفظة</string>
+    <string name="cash_on_delivery">الدفع عند الاستلام</string>
+    <string name="checkout">تاكيد </string>
+    <string name="enter_discount_code">أدخل رمز الخصم</string>
+    <string name="coupon_code">رمز القسيمة</string>
+    <string name="billing_summary">ملخص الفواتير</string>
+    <string name="items_price">السعر</string>
+    <string name="delivery_fees">رسوم التوصيل</string>
+    <string name="confirm_order">تأكيد الطلب</string>
+    <string name="coupon_code_is_invaild">رمز القسيمة غير صالح</string>
+    <string name="online_payment">الدفع عبر الإنترنت</string>
+    <string name="order_placed">تم تقديم الطلب</string>
+    <string name="thank_u_for_order">شكرا لك على الشراء من شمس ، طلبك قيد التقدم ، يمكنك متابعة التسوق أو إظهار طلبك من قسم الطلبات في الحساب.</string>
+    <string name="order_number">رقم الطلب:</string>
+    <string name="pick_up_address">استلام العنوان:</string>
+    <string name="continue_shopping">مواصلة التسوق</string>
+    <string name="show_your_order">أظهر طلبك</string>
+    <string name="order_sent_successfully">تم إرسال الطلب بنجاح</string>
+
 
 
 </resources>
