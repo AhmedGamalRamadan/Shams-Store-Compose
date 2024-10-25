@@ -235,7 +235,7 @@ fun HomeScreen(
 
                                             viewModel.addToCart(
                                                 bearerToken = "Bearer ${sharedPrefManager.getToken()}",
-                                                guestToken = null,
+                                                guestToken = "1221",
                                                 addToCartRequest = AddToCartRequest(
                                                     product_id = productId,
                                                     quantity = productQuantity

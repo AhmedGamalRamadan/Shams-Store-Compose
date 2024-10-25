@@ -5,14 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,23 +37,41 @@ import com.ag.projects.shamsstorecompose.presentation.ui.theme.Grey
 fun ShoppingCartItem(
     modifier: Modifier = Modifier,
     productItem: Item,
-) {
+    deleteItem: ((Int) -> Unit)? = null,
+    addItem: ((Int, Int) -> Unit)? = null,
+
+    ) {
 
     var productQuantity by remember {
         mutableIntStateOf(1)
     }
 
-    Column(
+
+    Card(
         modifier = modifier
             .fillMaxWidth()
+            .padding(bottom = 8.dp)
             .height(160.dp),
-    ) {
+        shape = RoundedCornerShape(13.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp,
+            pressedElevation = 8.dp
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
 
-        Row(
+    ) {
+        Column(
             modifier = modifier
-                .fillMaxWidth()
+                .fillMaxSize()
         ) {
-            Row {
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+            ) {
+
                 AsyncImage(
                     modifier = modifier
                         .size(80.dp),
@@ -61,10 +81,7 @@ fun ShoppingCartItem(
 
                 Spacer(modifier = modifier.width(3.dp))
 
-                Column(
-                    modifier = modifier
-                        .fillMaxHeight()
-                ) {
+                Column {
                     Text(
                         text = productItem.product_detail.name,
                         color = Color.Green,
@@ -74,7 +91,6 @@ fun ShoppingCartItem(
                     Text(text = productItem.product_detail.desc, maxLines = 1)
 
                     Spacer(modifier = modifier.height(5.dp))
-
                     //Price
                     Row {
                         productItem.product_detail.price_after?.let {
@@ -90,33 +106,28 @@ fun ShoppingCartItem(
                             )
                         } ?: run {
                             Text(
-                                text = productItem.product_detail.price.toString() + " " + productItem.product_detail.currency,
+                                text = productItem.total_price.toString() + " " + productItem.product_detail.currency,
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold
                             )
                         }
-
                     }
                 }
-
-
-                Image(
-
-                    painter = painterResource(id = R.drawable.ic_delete),
-                    contentDescription = stringResource(id = R.string.delete)
-                )
-
             }
-        }
 
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
             ) {
                 IconButton(
-                    onClick = {}
+                    onClick = {
+                        // call add
+                        if (productItem.quantity > 1) {
+                            addItem?.invoke(productItem.product_detail.id, --productItem.quantity)
+                        } else {
+                            deleteItem?.invoke(productItem.id)
+                        }
+                    }
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_minus),
@@ -125,13 +136,15 @@ fun ShoppingCartItem(
                 }
 
                 Text(
-                    text = "$productQuantity",
+                    text = "${productItem.quantity}",
                     modifier = modifier.padding(horizontal = 8.dp),
                     fontWeight = FontWeight.Bold
                 )
 
                 IconButton(
-                    onClick = {}
+                    onClick = {
+                        addItem?.invoke(productItem.product_detail.id, ++productItem.quantity)
+                    }
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_plus),
@@ -139,8 +152,15 @@ fun ShoppingCartItem(
                     )
                 }
 
+                IconButton(
+                    onClick = { },
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_delete),
+                        contentDescription = stringResource(id = R.string.delete)
+                    )
+                }
             }
         }
-
     }
 }
