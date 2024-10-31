@@ -50,4 +50,13 @@ object Constants {
     const val TYPE = "type"
 
     const val CARTS = "carts"
+
+    /*
+   Addresses
+    */
+    const val ADDRESSES = "addresses"
+    const val CREATE_ADDRESS = "addresses"
+    const val UPDATE_ADDRESS = "addresses/{id}"
+    const val REMOVE_ADDRESS = "addresses/{id}"
+    const val IS_DEFAULT_ADDRESS = "addresses/{id}/is_default"
 }

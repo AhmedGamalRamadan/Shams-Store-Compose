@@ -1,5 +1,8 @@
 package com.ag.projects.domain.repository
 
+import com.ag.projects.domain.model.address.AddAddressResponse
+import com.ag.projects.domain.model.address.AddressesResponse
+import com.ag.projects.domain.model.address.CreateAddressRequest
 import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
@@ -86,5 +89,42 @@ interface ProductsRepository {
         lat: Double = Constants.LAT,
         lng: Double = Constants.LNG,
     ): ShoppingCartResponse
+
+    /*
+   Addresses
+    */
+
+    suspend fun getAddresses(
+        auth: String?,
+        guestToken: String?,
+    ): AddressesResponse
+
+    suspend fun createAddress(
+        auth: String?,
+        guestToken: String?,
+        createAddressRequest: CreateAddressRequest?,
+    ): AddAddressResponse
+
+
+    suspend fun removeAddress(
+        auth: String?,
+        addressId: String,
+        guestToken: String?,
+    ): AddressesResponse
+
+
+    suspend fun updateAddress(
+        auth: String?,
+        addressId: String,
+        guestToken: String?,
+        createAddressRequest: CreateAddressRequest?,
+    ): AddAddressResponse
+
+    suspend fun isDefaultAddress(
+        auth: String?,
+        addressId: String,
+        guestToken: String?,
+        isDefaultRequest: Int?,
+    ): AddAddressResponse
 
 }

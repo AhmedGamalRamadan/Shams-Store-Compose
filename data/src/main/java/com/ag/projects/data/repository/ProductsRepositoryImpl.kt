@@ -1,6 +1,9 @@
 package com.ag.projects.data.repository
 
 import com.ag.projects.data.remote.ProductsAPIServices
+import com.ag.projects.domain.model.address.AddAddressResponse
+import com.ag.projects.domain.model.address.AddressesResponse
+import com.ag.projects.domain.model.address.CreateAddressRequest
 import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
@@ -15,6 +18,16 @@ import com.ag.projects.domain.model.qa.faq.FAQResponse
 import com.ag.projects.domain.model.qa.policy.PolicyDataResponse
 import com.ag.projects.domain.model.qa.tarms_conditon.TermsAndConditionResponse
 import com.ag.projects.domain.repository.ProductsRepository
+import com.ag.projects.domain.utils.Constants
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 class ProductsRepositoryImpl(
     private val productsAPIServices: ProductsAPIServices
@@ -128,5 +141,49 @@ class ProductsRepositoryImpl(
         lat = lat,
         lng = lng
     )
+
+    /*
+Addresses
+ */
+
+    override suspend fun getAddresses(auth: String?, guestToken: String?): AddressesResponse =
+        productsAPIServices.getAddresses(
+            auth,
+            guestToken,
+        )
+
+    override suspend fun createAddress(
+        auth: String?,
+        guestToken: String?,
+        createAddressRequest: CreateAddressRequest?
+    ): AddAddressResponse =
+        productsAPIServices.createAddress(auth, guestToken, createAddressRequest)
+
+
+    override suspend fun removeAddress(
+        auth: String?,
+        addressId: String,
+        guestToken: String?
+    ): AddressesResponse = productsAPIServices.removeAddress(auth, addressId, guestToken)
+
+
+    override suspend fun updateAddress(
+        auth: String?,
+        addressId: String,
+        guestToken: String?,
+        createAddressRequest: CreateAddressRequest?
+    ): AddAddressResponse = productsAPIServices.updateAddress(
+        auth, addressId, guestToken, createAddressRequest
+    )
+
+    override suspend fun isDefaultAddress(
+        auth: String?,
+        addressId: String,
+        guestToken: String?,
+        isDefaultRequest: Int?
+    ): AddAddressResponse = productsAPIServices.isDefaultAddress(
+        auth, addressId, guestToken, isDefaultRequest
+    )
+
 
 }

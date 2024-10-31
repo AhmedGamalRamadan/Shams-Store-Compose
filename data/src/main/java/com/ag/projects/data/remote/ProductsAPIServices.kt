@@ -1,5 +1,8 @@
 package com.ag.projects.data.remote
 
+import com.ag.projects.domain.model.address.AddAddressResponse
+import com.ag.projects.domain.model.address.AddressesResponse
+import com.ag.projects.domain.model.address.CreateAddressRequest
 import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
@@ -16,6 +19,8 @@ import com.ag.projects.domain.model.qa.tarms_conditon.TermsAndConditionResponse
 import com.ag.projects.domain.utils.Constants
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -125,4 +130,49 @@ interface ProductsAPIServices {
         @Query("lat") lat: Double = Constants.LAT,
         @Query("lng") lng: Double = Constants.LNG,
     ): ShoppingCartResponse
+
+
+    /*
+  Addresses
+
+   */
+    @POST(Constants.CREATE_ADDRESS)
+    suspend fun createAddress(
+        @Header("Authorization") auth: String?,
+        @Query("guest_token") guestToken: String?,
+        @Body createAddressRequest: CreateAddressRequest?,
+    ): AddAddressResponse
+
+
+    @GET(Constants.ADDRESSES)
+    suspend fun getAddresses(
+        @Header("Authorization") auth: String?,
+        @Query("guest_token") guestToken: String?,
+    ): AddressesResponse
+
+
+    @DELETE(Constants.REMOVE_ADDRESS)
+    suspend fun removeAddress(
+        @Header("Authorization") auth: String?,
+        @Path("id") addressId: String,
+        @Query("guest_token") guestToken: String?,
+    ): AddressesResponse
+
+
+    @POST(Constants.UPDATE_ADDRESS)
+    suspend fun updateAddress(
+        @Header("Authorization") auth: String?,
+        @Path("id") addressId: String,
+        @Query("guest_token") guestToken: String?,
+        @Body createAddressRequest: CreateAddressRequest?,
+    ): AddAddressResponse
+
+    @FormUrlEncoded
+    @POST(Constants.IS_DEFAULT_ADDRESS)
+    suspend fun isDefaultAddress(
+        @Header("Authorization") auth: String?,
+        @Path("id") addressId: String,
+        @Query("guest_token") guestToken: String?,
+        @Field("is_default") isDefaultRequest: Int?,
+    ): AddAddressResponse
 }
