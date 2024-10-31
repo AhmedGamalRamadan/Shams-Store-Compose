@@ -54,7 +54,9 @@ fun CartScreen(
     val viewModel: CartScreenViewModel = hiltViewModel()
     val carts by viewModel.getCartItems.collectAsState()
 
-    LaunchedEffect(key1 = carts) {
+    LaunchedEffect(
+        key1 = carts
+    ) {
         viewModel.getCarts(
             bearerToken = "Bearer ${sharedPrefManager.getToken()}",
             addressId = 1,
@@ -90,12 +92,31 @@ fun CartScreen(
                 is Result.Error -> {}
                 Result.Loading -> {}
                 is Result.Success -> {
+                    LaunchedEffect(
+                        key1 = (carts as? Result.Success)?.data?.data?.cart?.items
+                    ) {
+                        viewModel.getCarts(
+                            bearerToken = "Bearer ${sharedPrefManager.getToken()}",
+                            addressId = 1,
+                            isPicked = 2,
+                            branchWorkTimeId = 1
+                        )
+                    }
 
                     (carts as Result.Success).data.data.cart?.let { cart ->
 
                         LazyColumn {
                             items(cart.items) { productItem ->
-
+                                LaunchedEffect(
+                                    key1 = (carts as Result.Success).data.data.cart.items
+                                ) {
+                                    viewModel.getCarts(
+                                        bearerToken = "Bearer ${sharedPrefManager.getToken()}",
+                                        addressId = 1,
+                                        isPicked = 2,
+                                        branchWorkTimeId = 1
+                                    )
+                                }
                                 ShoppingCartItem(
                                     productItem = productItem,
                                     deleteItem = { productId ->

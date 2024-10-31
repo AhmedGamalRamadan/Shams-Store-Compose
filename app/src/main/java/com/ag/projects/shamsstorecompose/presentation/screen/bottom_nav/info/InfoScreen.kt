@@ -102,7 +102,9 @@ fun InfoScreen(
             Spacer(modifier = Modifier.height(6.dp))
             CustomRowQA(
                 title = stringResource(id = R.string.saved_address),
-                onRowClick = {}
+                onRowClick = {
+                    navHostController.navigate(Screen.Address.rout)
+                }
             )
 
             CustomRowQA(

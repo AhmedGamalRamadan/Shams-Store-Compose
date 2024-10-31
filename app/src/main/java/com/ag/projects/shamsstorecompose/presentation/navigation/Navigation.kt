@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ag.projects.shamsstorecompose.presentation.common.BottomNavigationBar
+import com.ag.projects.shamsstorecompose.presentation.screen.address.AddressScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.login.LoginScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.login_success.LoginSuccessScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.register.RegisterUserNameScreen
@@ -146,6 +147,10 @@ fun Navigation(
                         navHostController = navController,
                         backStackEntry = navBackStackEntry
                     )
+                }
+
+                composable(Screen.Address.rout){
+                    AddressScreen(navHostController = navController)
                 }
             }
         }

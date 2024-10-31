@@ -8,6 +8,7 @@ sealed class Screen(val rout: String) {
     object FAQ : Screen("faq")
     object PrivacyPolicy : Screen("privacyPolicy")
     object TermsAndCondition : Screen("termsAndCondition")
+    object Address : Screen("address")
 
     /*
     Auth
