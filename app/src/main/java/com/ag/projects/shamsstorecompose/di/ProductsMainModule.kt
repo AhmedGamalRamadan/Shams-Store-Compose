@@ -3,6 +3,11 @@ package com.ag.projects.shamsstorecompose.di
 import com.ag.projects.data.remote.ProductsAPIServices
 import com.ag.projects.data.repository.ProductsRepositoryImpl
 import com.ag.projects.domain.repository.ProductsRepository
+import com.ag.projects.domain.usecase.addresses.create.CreateAddressUseCase
+import com.ag.projects.domain.usecase.addresses.get.GetAddressesUseCase
+import com.ag.projects.domain.usecase.addresses.is_default.IsDefaultAddressUseCase
+import com.ag.projects.domain.usecase.addresses.remove.RemoveAddressUseCase
+import com.ag.projects.domain.usecase.addresses.update.UpdateAddressUseCase
 import com.ag.projects.domain.usecase.auth.login.LoginUseCase
 import com.ag.projects.domain.usecase.auth.register.RegisterUseCase
 import com.ag.projects.domain.usecase.auth.verify.VerifyUSeCase
@@ -131,6 +136,36 @@ object ProductsMainModule {
     @Singleton
     fun provideDeleteCartItemUseCase(productsRepository: ProductsRepository) =
         DeleteCartItemUseCase(productsRepository)
+
+    /*
+Addresses
+ */
+
+    @Provides
+    @Singleton
+    fun provideGetAddressesUseCase(productsRepository: ProductsRepository) =
+        GetAddressesUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideCreateAddressesUseCase(productsRepository: ProductsRepository) =
+        CreateAddressUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideRemoveAddressesUseCase(productsRepository: ProductsRepository) =
+        RemoveAddressUseCase(productsRepository)
+
+
+    @Provides
+    @Singleton
+    fun provideUpdateAddressesUseCase(productsRepository: ProductsRepository) =
+        UpdateAddressUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideIsDefaultAddressesUseCase(productsRepository: ProductsRepository) =
+        IsDefaultAddressUseCase(productsRepository)
 
 
 }
