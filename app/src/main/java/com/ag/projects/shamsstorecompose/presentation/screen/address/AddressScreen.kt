@@ -36,6 +36,7 @@ import androidx.navigation.NavHostController
 import com.ag.projects.data.local.SharedPreferencesManager
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
+import com.ag.projects.shamsstorecompose.presentation.components.address.AddressCard
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Green
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.Grey
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.LightGreen
@@ -57,7 +58,7 @@ fun AddressScreen(
 
     LaunchedEffect(key1 = Unit) {
         viewModel.getAddresses(
-            auth = ""
+            auth = "Bearer ${sharedPrefManager.getToken()}"
         )
     }
 
@@ -117,8 +118,15 @@ fun AddressScreen(
                                 .fillMaxSize()
                                 .padding(start = 14.dp, end = 14.dp)
                         ) {
-                            items(userAddresses) {
-                                Text(text = it.country.toString())
+                            items(userAddresses) { defaultAddress ->
+                                AddressCard(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    defaultAddress = defaultAddress,
+                                    onDeleteClick = {},
+                                    onEditClick = {},
+                                    isDefault = defaultAddress.is_default!!,
+                                    onDefaultChange = {}
+                                )
                             }
                         }
 
