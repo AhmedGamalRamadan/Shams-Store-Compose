@@ -18,6 +18,7 @@ import com.ag.projects.domain.usecase.cart.delete.DeleteCartItemUseCase
 import com.ag.projects.domain.usecase.cart.get.GetShoppingCartUseCase
 import com.ag.projects.domain.usecase.details.GetProductDetailsUseCase
 import com.ag.projects.domain.usecase.products.GetProductsUseCase
+import com.ag.projects.domain.usecase.products.all_categories.GetAllCategoriesBrandsUseCase
 import com.ag.projects.domain.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -173,5 +174,9 @@ Addresses
     fun provideIsDefaultAddressesUseCase(productsRepository: ProductsRepository) =
         IsDefaultAddressUseCase(productsRepository)
 
+    @Provides
+    @Singleton
+    fun provideGetAllCategoriesBrandsUseCase(productsRepository: ProductsRepository) =
+        GetAllCategoriesBrandsUseCase(productsRepository)
 
 }
