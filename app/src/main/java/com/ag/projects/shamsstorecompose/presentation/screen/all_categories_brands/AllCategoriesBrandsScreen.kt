@@ -2,8 +2,6 @@ package com.ag.projects.shamsstorecompose.presentation.screen.all_categories_bra
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -29,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +45,7 @@ import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 import com.ag.projects.shamsstorecompose.presentation.components.products.ProductItemCard
 import com.ag.projects.shamsstorecompose.utils.NavArguments
 import com.ag.projects.shamsstorecompose.utils.Result
+import kotlinx.coroutines.launch
 
 @Composable
 fun AllCategoriesBrandsScreen(
@@ -55,6 +55,7 @@ fun AllCategoriesBrandsScreen(
 
     val categoryId = backStackEntry.arguments?.getInt(NavArguments.CATEGORY_ID) ?: 0
     val brandId = backStackEntry.arguments?.getInt(NavArguments.BRAND_ID) ?: 0
+
 
     val viewModel: AllCategoriesBrandsScreenViewModel = hiltViewModel()
     val allCategoriesState by viewModel.allCategoriesHeader.collectAsState()
@@ -69,8 +70,12 @@ fun AllCategoriesBrandsScreen(
     var categorySelectedIndex by remember {
         mutableIntStateOf(0)
     }
-    LaunchedEffect(key1 = Unit) {
 
+    var selectedCategoryId = 0
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.resetPagination()
         val categoryID = if (categoryId == 0) null else categoryId
         val brandID = if (brandId == 0) null else brandId
 
@@ -124,7 +129,18 @@ fun AllCategoriesBrandsScreen(
                                 val isSelected = index == categorySelectedIndex
                                 Button(
                                     onClick = {
-                                        categorySelectedIndex = index
+                                        scope.launch {
+                                            viewModel.resetPagination()
+                                            categorySelectedIndex = index
+
+                                            selectedCategoryId = dataCategories.id
+                                            viewModel.getCategoriesBrands(
+                                                auth = "Bearer ${sharedPrefManager.getToken()}",
+                                                categoryId = dataCategories.id,
+                                                brandId = null
+                                            )
+                                        }
+
                                     },
                                     modifier = Modifier
                                         .padding(8.dp)
@@ -196,27 +212,38 @@ fun AllCategoriesBrandsScreen(
             Spacer(modifier = Modifier.height(6.dp))
 
             when (products) {
-                is Result.Error -> {}
-                Result.Loading -> {}
+                is Result.Error -> {
+                    Text(text = (products as Result.Error).message)
+                }
+                Result.Loading -> {
+                    Text(text = stringResource(id = R.string.loading))
+                }
                 is Result.Success -> {
-                    val productsContent = (products as Result.Success).data.data
-                        LazyVerticalGrid(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(500.dp) ,
-                            columns = GridCells.Fixed(2)
-                        ) {
-                            items(productsContent) { content ->
-                                ProductItemCard(
-                                    content = content,
-                                    navHostController = navHostController
-                                )
+                    val productsContent = (products as Result.Success).data
+                    LazyVerticalGrid(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(500.dp),
+                        columns = GridCells.Fixed(2)
+                    ) {
+                        itemsIndexed(productsContent) { index, content ->
+                            ProductItemCard(
+                                content = content,
+                                navHostController = navHostController
+                            )
+                            if (index >= productsContent.size - 1) {
+                                LaunchedEffect(key1 = Unit) {
+                                    viewModel.loadNextPage(
+                                        auth = "Bearer ${sharedPrefManager.getToken()}",
+                                        categoryId = selectedCategoryId,
+                                        brandId = null
+                                    )
+                                }
                             }
                         }
+                    }
                 }
             }
         }
-
-
     }
 }
