@@ -20,18 +20,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.ag.projects.domain.model.products.brand.DataCategories
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.DarkBlue
-import com.ag.projects.shamsstorecompose.utils.Screen
 
 @Composable
 fun CategoriesItem(
     dataCategories: DataCategories,
     modifier: Modifier = Modifier,
-    navHostController: NavHostController
+    onItemClick: (Int) -> Unit
 ) {
 
     Column(
@@ -46,7 +44,7 @@ fun CategoriesItem(
                 .size(120.dp)
                 .padding(8.dp)
                 .clickable {
-                    navHostController.navigate(Screen.AllCategoriesBrands.rout+"/0/0")
+                    onItemClick(dataCategories.id)
                 },
             shape = RoundedCornerShape(8.dp),
             colors = CardDefaults.cardColors(

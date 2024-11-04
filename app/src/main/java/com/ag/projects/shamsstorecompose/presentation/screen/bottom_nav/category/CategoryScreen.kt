@@ -30,6 +30,7 @@ import com.ag.projects.shamsstorecompose.presentation.components.products.Catego
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.utils.network.NetworkConnection
 import com.ag.projects.shamsstorecompose.utils.Result
+import com.ag.projects.shamsstorecompose.utils.Screen
 
 @Composable
 fun CategoryScreen(
@@ -96,7 +97,7 @@ fun CategoryScreen(
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(text = (categoriesState as Result.Error).message.toString())
+                            Text(text = (categoriesState as Result.Error).message)
                         }
 
                     }
@@ -117,16 +118,15 @@ fun CategoryScreen(
                             items(productsCategory) { dataCategories ->
                                 CategoriesItem(
                                     dataCategories = dataCategories,
-                                    navHostController = navHostController
+                                    onItemClick = { categoryId ->
+                                        navHostController.navigate(Screen.AllCategoriesBrands.rout + "/$categoryId/0")
+                                    }
                                 )
-
                             }
                         }
                     }
                 }
             }
         }
-
-
     }
 }

@@ -17,30 +17,16 @@ class AllCategoriesBrandsScreenViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase
 ) : ViewModel() {
 
-    private val _allCategories = MutableStateFlow<Result<CategoriesResponse>>(Result.Loading)
-    val allCategories = _allCategories.asStateFlow()
+    private val _allCategoriesHeader = MutableStateFlow<Result<CategoriesResponse>>(Result.Loading)
+    val allCategoriesHeader = _allCategoriesHeader.asStateFlow()
 
-    private val _allBrands = MutableStateFlow<Result<CategoriesResponse>>(Result.Loading)
-    val allBrands = _allBrands.asStateFlow()
-
-    fun getAllCategories() {
+    fun getAllCategoriesHeader() {
         viewModelScope.launch {
             handleRequest(
                 request = {
                     getProductsUseCase.getAllCategories()
                 },
-                state = _allCategories
-            )
-        }
-    }
-
-    fun getAllBrands() {
-        viewModelScope.launch {
-            handleRequest(
-                request = {
-                    getProductsUseCase.getAllBrands()
-                },
-                state = _allBrands
+                state = _allCategoriesHeader
             )
         }
     }

@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -29,6 +27,7 @@ import com.ag.projects.shamsstorecompose.presentation.components.CommonHeader
 import com.ag.projects.shamsstorecompose.presentation.components.products.CategoriesItem
 import com.ag.projects.shamsstorecompose.presentation.screen.HomeViewModel
 import com.ag.projects.shamsstorecompose.utils.Result
+import com.ag.projects.shamsstorecompose.utils.Screen
 
 @Composable
 fun BrandsScreen(
@@ -103,14 +102,14 @@ fun BrandsScreen(
                         items(productsBrands) { dataCategories ->
                             CategoriesItem(
                                 dataCategories = dataCategories,
-                                navHostController = navHostController
+                                onItemClick = { brandId ->
+                                    navHostController.navigate(Screen.AllCategoriesBrands.rout + "/0/$brandId")
+                                }
                             )
                         }
                     }
                 }
             }
         }
-
     }
-
 }
