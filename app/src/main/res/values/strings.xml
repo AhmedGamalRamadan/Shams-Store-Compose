@@ -200,4 +200,6 @@
     <string name="price_price">Price</string>
     <string name="min">Min</string>
     <string name="value">Value</string>
+    <string name="grid">Grid View</string>
+    <string name="linear">Linear View</string>
 </resources>

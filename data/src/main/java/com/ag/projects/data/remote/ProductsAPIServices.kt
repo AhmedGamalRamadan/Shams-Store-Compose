@@ -7,6 +7,7 @@ import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
 import com.ag.projects.domain.model.country.AllCountriesResponse
+import com.ag.projects.domain.model.products.all_categories.AllProductsResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
 import com.ag.projects.domain.model.products.cart.AddToCartRequest
 import com.ag.projects.domain.model.products.cart.response.ShoppingCartResponse
@@ -175,4 +176,23 @@ interface ProductsAPIServices {
         @Query("guest_token") guestToken: String?,
         @Field("is_default") isDefaultRequest: Int?,
     ): AddAddressResponse
+
+    @GET(Constants.GET_All_PRODUCTS)
+    suspend fun getAllProducts(
+        @Header("Authorization") auth: String?,
+        @Query("guest_token") guestToken: String?,
+        @Query("page") page: Int?,
+        @Query("category_id") categoryId: Int?,
+        @Query("brand_id") brandId: Int?,
+        @Query("lat") lat: Double?,
+        @Query("lng") lng: Double?,
+        @Query("type") type: String?,
+        @Query("product_id") productId: Int?,
+        @Query("from_price") fromPrice: Float?,
+        @Query("to_price") toPrice: Float?,
+        @Query("brandIds[]") brandIds: List<Int>?,
+        @Query("delivery_type") deliveryType: String?,
+        @Query("filter_type") filterType: String?,
+        @Query("sorted") sorted: String?,
+    ): AllProductsResponse
 }

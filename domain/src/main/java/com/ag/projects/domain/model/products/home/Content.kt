@@ -1,4 +1,7 @@
 package com.ag.projects.domain.model.products.home
+
+
+
 data class Content(
     val available_quantity: Int,
     val brand: Brand,
@@ -23,5 +26,9 @@ data class Content(
     val rate_avg: Int,
     val total_price: Int,
     val type: Any,
-    val type_trans: Any
+    val type_trans: Any,
+    val code: String,
+    val is_replace: Boolean,
+    val points: Int,
+    val replace_trans: String,
 )

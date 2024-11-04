@@ -59,4 +59,6 @@ object Constants {
     const val UPDATE_ADDRESS = "addresses/{id}"
     const val REMOVE_ADDRESS = "addresses/{id}"
     const val IS_DEFAULT_ADDRESS = "addresses/{id}/is_default"
+
+    const val GET_All_PRODUCTS = "products"
 }

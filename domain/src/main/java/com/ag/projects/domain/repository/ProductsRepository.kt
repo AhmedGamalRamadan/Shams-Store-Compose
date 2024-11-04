@@ -7,6 +7,7 @@ import com.ag.projects.domain.model.auth.login.AuthenticationRequest
 import com.ag.projects.domain.model.auth.login.LoginResponse
 import com.ag.projects.domain.model.auth.verify.VerifyResponse
 import com.ag.projects.domain.model.country.AllCountriesResponse
+import com.ag.projects.domain.model.products.all_categories.AllProductsResponse
 import com.ag.projects.domain.model.products.brand.CategoriesResponse
 import com.ag.projects.domain.model.products.cart.AddToCartRequest
 import com.ag.projects.domain.model.products.cart.response.ShoppingCartResponse
@@ -126,5 +127,23 @@ interface ProductsRepository {
         guestToken: String?,
         isDefaultRequest: Int?,
     ): AddAddressResponse
+
+    suspend fun getAllProducts(
+        auth: String?,
+        guestToken: String?,
+        page: Int?,
+        categoryId: Int?,
+        brandId: Int?,
+        lat: Double?,
+        lng: Double?,
+        type: String?,
+        productId: Int?,
+        fromPrice: Float?,
+        toPrice: Float?,
+        brandIds: List<Int>?,
+        deliveryType: String?,
+        filterType: String?,
+        sorted: String?,
+    ): AllProductsResponse
 
 }

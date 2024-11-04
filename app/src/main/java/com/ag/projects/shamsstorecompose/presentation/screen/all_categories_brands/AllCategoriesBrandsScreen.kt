@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -126,19 +127,41 @@ fun AllCategoriesBrandsScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            Image(
-                painter = painterResource(id = R.drawable.ic_filter), contentDescription = ""
-            )
-            Image(
-                painter = painterResource(id = R.drawable.ic_sort), contentDescription = ""
-            )
-            Image(
-                painter = painterResource(id = R.drawable.ic_grid_view), contentDescription = ""
-            )
-            Image(
-                painter = painterResource(id = R.drawable.ic_linear_view), contentDescription = ""
-            )
+            IconButton(onClick = {}) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_filter),
+                    contentDescription = stringResource(
+                        id = R.string.filter
+                    )
+                )
+            }
+            IconButton(onClick = {}) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_sort),
+                    contentDescription = stringResource(
+                        id = R.string.sort
+                    )
+                )
+            }
 
+            IconButton(onClick = {}) {
+
+                Image(
+                    painter = painterResource(id = R.drawable.ic_grid_view),
+                    contentDescription = stringResource(
+                        id = R.string.grid
+                    )
+                )
+            }
+
+            IconButton(onClick = {}) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_linear_view),
+                    contentDescription = stringResource(
+                        id = R.string.linear
+                    )
+                )
+            }
 
         }
 
