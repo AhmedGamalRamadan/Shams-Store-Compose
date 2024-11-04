@@ -162,7 +162,8 @@ fun Navigation(
                     )
                 ) { navBackStackEntry ->
                     AllCategoriesBrandsScreen(
-                        backStackEntry = navBackStackEntry
+                        backStackEntry = navBackStackEntry,
+                        navHostController = navController
                     )
                 }
             }
