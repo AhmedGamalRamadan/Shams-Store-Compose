@@ -1,9 +1,11 @@
 package com.ag.projects.shamsstorecompose.presentation.screen.brands
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -52,29 +54,26 @@ fun BrandsScreen(
 
     viewModel.getAllBrands()
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
     ) {
 
-        CommonHeader(
-            editTextValue = textSearchState,
-            onValueChange = {
-                textSearchState = it
-            },
-            screenName = stringResource(id = R.string.all_brands),
-            onBackClick = {
-                navHostController.navigateUp()
-            },
-            iconBack = painterResource(id = R.drawable.ic_arrow_back),
-        )
+        item {
+            CommonHeader(
+                editTextValue = textSearchState,
+                onValueChange = {
+                    textSearchState = it
+                },
+                screenName = stringResource(id = R.string.all_brands),
+                onBackClick = {
+                    navHostController.navigateUp()
+                },
+                iconBack = painterResource(id = R.drawable.ic_arrow_back),
+            )
+        }
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp)
-        ) {
-
+        item {
             when (brandContent) {
                 is Result.Error -> {
                     Box(
@@ -98,7 +97,13 @@ fun BrandsScreen(
                 is Result.Success -> {
                     val productsBrands = (brandContent as Result.Success).data.data
 
-                    LazyVerticalGrid(columns = GridCells.Fixed(numberOfColumns)) {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(numberOfColumns),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(500.dp)
+                            .padding(12.dp)
+                    ) {
                         items(productsBrands) { dataCategories ->
                             CategoriesItem(
                                 dataCategories = dataCategories,
@@ -111,5 +116,7 @@ fun BrandsScreen(
                 }
             }
         }
+
+
     }
 }

@@ -2,9 +2,11 @@ package com.ag.projects.shamsstorecompose.presentation.screen.bottom_nav.categor
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -59,27 +61,26 @@ fun CategoryScreen(
         mutableStateOf("")
     }
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
     ) {
 
-        CommonHeader(
-            editTextValue = textSearchState,
-            onValueChange = {
-                textSearchState = it
-            },
-            screenName = stringResource(id = R.string.all_category),
-            onBackClick = {
-                navHostController.navigateUp()
-            },
-            iconBack = painterResource(id = R.drawable.ic_arrow_back),
-        )
+        item {
+            CommonHeader(
+                editTextValue = textSearchState,
+                onValueChange = {
+                    textSearchState = it
+                },
+                screenName = stringResource(id = R.string.all_category),
+                onBackClick = {
+                    navHostController.navigateUp()
+                },
+                iconBack = painterResource(id = R.drawable.ic_arrow_back),
+            )
+        }
 
-        Column(
-            modifier = Modifier
-                .padding(12.dp)
-        ) {
+        item {
             if (!isWifiConnected) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -114,7 +115,13 @@ fun CategoryScreen(
                     is Result.Success -> {
                         val productsCategory = (categoriesState as Result.Success).data.data
 
-                        LazyVerticalGrid(columns = GridCells.Fixed(numberOfColumns)) {
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(numberOfColumns),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(500.dp)
+                                .padding(12.dp)
+                        ) {
                             items(productsCategory) { dataCategories ->
                                 CategoriesItem(
                                     dataCategories = dataCategories,
