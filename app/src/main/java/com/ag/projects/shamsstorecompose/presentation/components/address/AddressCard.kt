@@ -2,9 +2,7 @@ package com.ag.projects.shamsstorecompose.presentation.components.address
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,8 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -32,7 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ag.projects.domain.model.address.DefaultAddress
 import com.ag.projects.shamsstorecompose.R
-import com.ag.projects.shamsstorecompose.presentation.ui.theme.Grey
 
 @Composable
 fun AddressCard(
@@ -45,7 +40,7 @@ fun AddressCard(
 ) {
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(145.dp)
             .padding(8.dp),
@@ -58,7 +53,7 @@ fun AddressCard(
         )
     ) {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(7.dp),
             verticalAlignment = Alignment.Top,
@@ -67,7 +62,7 @@ fun AddressCard(
             Image(
                 painter = painterResource(id = R.drawable.img_location),
                 contentDescription = stringResource(id = R.string.location_name),
-                modifier = Modifier
+                modifier = modifier
                     .size(80.dp)
                     .padding(8.dp)
                     .clip(RoundedCornerShape(8.dp))
@@ -75,13 +70,13 @@ fun AddressCard(
             )
 
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .weight(1f)
                     .padding(start = 12.dp)
             ) {
                 Text(
                     text = defaultAddress.location_description.toString(),
-                    modifier = Modifier.padding(bottom = 4.dp)
+                    modifier = modifier.padding(bottom = 4.dp)
                 )
                 Text(
                     text = defaultAddress.place_description.toString(),
@@ -101,7 +96,7 @@ fun AddressCard(
                     )
                 }
 
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = modifier.weight(1f))
 
                 Switch(
                     checked = isDefault,

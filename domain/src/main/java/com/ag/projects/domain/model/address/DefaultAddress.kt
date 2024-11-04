@@ -1,7 +1,6 @@
 package com.ag.projects.domain.model.address
 
 import java.io.Serializable
-
 data class DefaultAddress(
     val country: String?,
     val id: Int?,
@@ -21,5 +20,5 @@ data class DefaultAddress(
     val apartment: String?,
     val is_verify: Boolean?,
     val step: String?,
-    val is_active:String
+    val is_active: String?
 ) : Serializable
