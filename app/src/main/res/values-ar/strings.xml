@@ -149,6 +149,7 @@
     <string name="continue_to_checkout">متابعة</string>
     <string name="total">المجموع:</string>
     <string name="items">أغراض:</string>
+    <string name="products_may_u_like">Products May U Like</string>
     <string name="total_price_may_vary_due_to_weighted_items_products_or_sale_price_changes_by_the_store_while_processing_the_order">قد يختلف السعر الإجمالي بسبب العناصر المرجحة أو المنتجات أو تغيرات أسعار البيع من قبل المتجر أثناء معالجة الطلب.</string>
     <string name="delivery_address">عنوان التسليم</string>
     <string name="default_address">120 شارع المطار، الوادي، الرياض 15021، المملكة العربية السعودية.</string>
@@ -171,7 +172,34 @@
     <string name="continue_shopping">مواصلة التسوق</string>
     <string name="show_your_order">أظهر طلبك</string>
     <string name="order_sent_successfully">تم إرسال الطلب بنجاح</string>
-
+    <string name="save_address">حفظ العنوان</string>
+    <string name="locate_me">حدد موقعي</string>
+    <string name="addresses">عناوين</string>
+    <string name="place_description">وصف المكان</string>
+    <string name="my_rest">راحتي</string>
+    <string name="building">مبني </string>
+    <string name="optional">(اختياري)</string>
+    <string name="floor">طابق</string>
+    <string name="apartment">شقة</string>
+    <string name="place_kind">نوع المكان</string>
+    <string name="work">عمل</string>
+    <string name="others">اخر</string>
+    <string name="add_address">إضافة عنوان</string>
+    <string name="your_location">موقعك</string>
+    <string name="selected_location">الموقع المحدد</string>
+    <string name="update_address">تحديث العنوان</string>
+    <string name="filter">تصفيه</string>
+    <string name="sort">ترتيب</string>
+    <string name="price_low_to_high">السعر من الأقل إلى الأعلى</string>
+    <string name="price_high_to_low">السعر من الاعلى الى الادنى</string>
+    <string name="most_popular">الأكثر شعبية</string>
+    <string name="new_arrival">وصل حديثا</string>
+    <string name="alphabetical_order_z_to_a">الترتيب الأبجدي من ي إلى أ</string>
+    <string name="alphabetical_order_a_to_z">الترتيب الأبجدي من الألف إلى الياء</string>
+    <string name="reset">اعاده تعيين</string>
+    <string name="price_price">ثمن</string>
+    <string name="min">الحد الادني </string>
+    <string name="value">قيمة</string>
 
 
 </resources>
