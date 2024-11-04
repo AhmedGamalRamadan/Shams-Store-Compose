@@ -8,4 +8,6 @@ object NavArguments {
     const val FULL_PHONE_NUMBER = "fullPhoneNumber"
 
     const val PRODUCT_ID = "productID"
+    const val CATEGORY_ID = "categoryID"
+    const val BRAND_ID = "brandID"
 }

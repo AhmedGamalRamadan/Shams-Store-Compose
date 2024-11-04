@@ -114,10 +114,10 @@ fun CategoryScreen(
                         val productsCategory = (categoriesState as Result.Success).data.data
 
                         LazyVerticalGrid(columns = GridCells.Fixed(numberOfColumns)) {
-                            items(productsCategory) {
+                            items(productsCategory) { dataCategories ->
                                 CategoriesItem(
-                                    categoryImage = it.image,
-                                    categoryName = it.name.toString()
+                                    dataCategories = dataCategories,
+                                    navHostController = navHostController
                                 )
 
                             }

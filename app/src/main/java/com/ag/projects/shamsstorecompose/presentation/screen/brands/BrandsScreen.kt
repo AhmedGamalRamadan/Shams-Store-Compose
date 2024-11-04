@@ -82,10 +82,11 @@ fun BrandsScreen(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text =(brandContent as Result.Error).message)
+                        Text(text = (brandContent as Result.Error).message)
                     }
 
                 }
+
                 Result.Loading -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -94,16 +95,16 @@ fun BrandsScreen(
                         Text(text = stringResource(id = R.string.loading))
                     }
                 }
+
                 is Result.Success -> {
                     val productsBrands = (brandContent as Result.Success).data.data
 
                     LazyVerticalGrid(columns = GridCells.Fixed(numberOfColumns)) {
-                        items(productsBrands) {
+                        items(productsBrands) { dataCategories ->
                             CategoriesItem(
-                                categoryImage = it.image,
-                                categoryName = it.name.toString()
+                                dataCategories = dataCategories,
+                                navHostController = navHostController
                             )
-
                         }
                     }
                 }

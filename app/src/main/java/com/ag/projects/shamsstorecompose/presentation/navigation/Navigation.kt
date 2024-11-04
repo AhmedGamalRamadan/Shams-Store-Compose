@@ -150,12 +150,20 @@ fun Navigation(
                     )
                 }
 
-                composable(Screen.Address.rout){
+                composable(Screen.Address.rout) {
                     AddressScreen(navHostController = navController)
                 }
 
-                composable(Screen.AllCategoriesBrands.rout){
-                    AllCategoriesBrandsScreen()
+                composable(
+                    Screen.AllCategoriesBrands.rout + "/{${NavArguments.CATEGORY_ID}}/{${NavArguments.BRAND_ID}}",
+                    arguments = listOf(
+                        navArgument(NavArguments.CATEGORY_ID) { type = NavType.IntType },
+                        navArgument(NavArguments.BRAND_ID) { type = NavType.IntType },
+                    )
+                ) { navBackStackEntry ->
+                    AllCategoriesBrandsScreen(
+                        backStackEntry = navBackStackEntry
+                    )
                 }
             }
         }

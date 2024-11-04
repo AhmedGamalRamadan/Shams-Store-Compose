@@ -1,5 +1,6 @@
 package com.ag.projects.shamsstorecompose.presentation.components.products
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,15 +20,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.ag.projects.domain.model.products.brand.DataCategories
 import com.ag.projects.shamsstorecompose.R
 import com.ag.projects.shamsstorecompose.presentation.ui.theme.DarkBlue
+import com.ag.projects.shamsstorecompose.utils.Screen
 
 @Composable
 fun CategoriesItem(
-    categoryImage: String,
-    categoryName: String,
-    modifier: Modifier = Modifier
+    dataCategories: DataCategories,
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController
 ) {
 
     Column(
@@ -40,7 +44,10 @@ fun CategoriesItem(
         Card(
             modifier = modifier
                 .size(120.dp)
-                .padding(8.dp),
+                .padding(8.dp)
+                .clickable {
+                    navHostController.navigate(Screen.AllCategoriesBrands.rout+"/0/0")
+                },
             shape = RoundedCornerShape(8.dp),
             colors = CardDefaults.cardColors(
                 contentColor = Color.White,
@@ -51,7 +58,7 @@ fun CategoriesItem(
             ),
         ) {
             AsyncImage(
-                model = categoryImage,
+                model = dataCategories.image,
                 contentDescription = stringResource(id = R.string.brand),
                 modifier = Modifier
                     .fillMaxSize()
@@ -62,7 +69,7 @@ fun CategoriesItem(
         }
 
         Text(
-            text = categoryName,
+            text = dataCategories.name.toString(),
             color = DarkBlue,
             textAlign = TextAlign.Center,
             fontSize = 15.sp,
