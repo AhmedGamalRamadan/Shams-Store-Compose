@@ -40,7 +40,7 @@ fun AddressCard(
 ) {
 
     Card(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .height(145.dp)
             .padding(8.dp),
@@ -53,7 +53,7 @@ fun AddressCard(
         )
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(7.dp),
             verticalAlignment = Alignment.Top,
@@ -62,7 +62,7 @@ fun AddressCard(
             Image(
                 painter = painterResource(id = R.drawable.img_location),
                 contentDescription = stringResource(id = R.string.location_name),
-                modifier = modifier
+                modifier = Modifier
                     .size(80.dp)
                     .padding(8.dp)
                     .clip(RoundedCornerShape(8.dp))
@@ -70,13 +70,13 @@ fun AddressCard(
             )
 
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .weight(1f)
                     .padding(start = 12.dp)
             ) {
                 Text(
                     text = defaultAddress.location_description.toString(),
-                    modifier = modifier.padding(bottom = 4.dp)
+                    modifier = Modifier.padding(bottom = 4.dp)
                 )
                 Text(
                     text = defaultAddress.place_description.toString(),
@@ -96,7 +96,7 @@ fun AddressCard(
                     )
                 }
 
-                Spacer(modifier = modifier.weight(1f))
+                Spacer(modifier = Modifier.weight(1f))
 
                 Switch(
                     checked = isDefault,

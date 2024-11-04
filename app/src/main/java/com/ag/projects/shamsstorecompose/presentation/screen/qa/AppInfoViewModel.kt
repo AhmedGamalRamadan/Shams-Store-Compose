@@ -7,7 +7,7 @@ import com.ag.projects.domain.model.qa.contact_us.ContactUsResponse
 import com.ag.projects.domain.model.qa.faq.FAQResponse
 import com.ag.projects.domain.model.qa.policy.PolicyDataResponse
 import com.ag.projects.domain.model.qa.tarms_conditon.TermsAndConditionResponse
-import com.ag.projects.domain.usecase.products.GetProductsUseCase
+import com.ag.projects.domain.usecase.app_info.GetAppInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,7 +19,7 @@ import java.io.IOException
 
 @HiltViewModel
 class AppInfoViewModel @Inject constructor(
-    private val getProductsUseCase: GetProductsUseCase
+    private val getAppInfoUseCase: GetAppInfoUseCase
 ) : ViewModel() {
 
     init {
@@ -47,7 +47,7 @@ class AppInfoViewModel @Inject constructor(
      private fun getPrivacyPolicyData() {
         viewModelScope.launch {
             try {
-                val privacyPolicyResponse = getProductsUseCase.getPrivacyPolicy()
+                val privacyPolicyResponse = getAppInfoUseCase.getPrivacyPolicy()
                 _privacyPolicyState.emit(Result.Success(privacyPolicyResponse))
             } catch (networkException: IOException) {
                 _privacyPolicyState.emit(Result.Error("Network error", networkException))
@@ -62,7 +62,7 @@ class AppInfoViewModel @Inject constructor(
     private fun getTermsAndConditionData() {
         viewModelScope.launch {
             try {
-                val termsAndConditionResponse = getProductsUseCase.getTermsAndCondition()
+                val termsAndConditionResponse = getAppInfoUseCase.getTermsAndCondition()
                 _termsAndConditionState.emit(Result.Success(termsAndConditionResponse))
             } catch (networkException: IOException) {
                 _termsAndConditionState.emit(Result.Error("Network error", networkException))
@@ -77,7 +77,7 @@ class AppInfoViewModel @Inject constructor(
     private fun getAboutUsData() {
         viewModelScope.launch {
             try {
-                val aboutUsResponse = getProductsUseCase.getAboutUsData()
+                val aboutUsResponse = getAppInfoUseCase.getAboutUsData()
                 _aboutUsState.emit(Result.Success(aboutUsResponse))
             } catch (networkException: IOException) {
                 _aboutUsState.emit(Result.Error("Network error", networkException))
@@ -93,7 +93,7 @@ class AppInfoViewModel @Inject constructor(
     private fun getFAqData() {
         viewModelScope.launch {
             try {
-                val faqResponse = getProductsUseCase.getFAQData()
+                val faqResponse = getAppInfoUseCase.getFAQData()
                 _faqState.emit(Result.Success(faqResponse))
             } catch (networkException: IOException) {
                 _faqState.emit(Result.Error("Network error", networkException))
@@ -109,7 +109,7 @@ class AppInfoViewModel @Inject constructor(
     private fun getContactUSData() {
         viewModelScope.launch {
             try {
-                val contactUsResponse = getProductsUseCase.getContactUs()
+                val contactUsResponse = getAppInfoUseCase.getContactUs()
                 _contactUsState.emit(Result.Success(contactUsResponse))
             } catch (networkException: IOException) {
                 _contactUsState.emit(Result.Error("Network error", networkException))

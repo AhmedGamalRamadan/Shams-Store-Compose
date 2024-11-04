@@ -8,6 +8,7 @@ import com.ag.projects.domain.usecase.addresses.get.GetAddressesUseCase
 import com.ag.projects.domain.usecase.addresses.is_default.IsDefaultAddressUseCase
 import com.ag.projects.domain.usecase.addresses.remove.RemoveAddressUseCase
 import com.ag.projects.domain.usecase.addresses.update.UpdateAddressUseCase
+import com.ag.projects.domain.usecase.app_info.GetAppInfoUseCase
 import com.ag.projects.domain.usecase.auth.login.LoginUseCase
 import com.ag.projects.domain.usecase.auth.register.RegisterUseCase
 import com.ag.projects.domain.usecase.auth.verify.VerifyUSeCase
@@ -93,6 +94,11 @@ object ProductsMainModule {
     @Singleton
     fun provideProductDetailsUseCase(productsRepository: ProductsRepository) =
         GetProductDetailsUseCase(productsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetAppInfoUseCase(productsRepository: ProductsRepository) =
+        GetAppInfoUseCase(productsRepository)
 
     /*
     Auth

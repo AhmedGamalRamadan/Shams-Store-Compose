@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ag.projects.shamsstorecompose.presentation.common.BottomNavigationBar
 import com.ag.projects.shamsstorecompose.presentation.screen.address.AddressScreen
+import com.ag.projects.shamsstorecompose.presentation.screen.all_categories_brands.AllCategoriesBrandsScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.login.LoginScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.login_success.LoginSuccessScreen
 import com.ag.projects.shamsstorecompose.presentation.screen.auth.register.RegisterUserNameScreen
@@ -152,8 +153,11 @@ fun Navigation(
                 composable(Screen.Address.rout){
                     AddressScreen(navHostController = navController)
                 }
+
+                composable(Screen.AllCategoriesBrands.rout){
+                    AllCategoriesBrandsScreen()
+                }
             }
         }
     }
 }
-
