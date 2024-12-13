@@ -5,7 +5,6 @@ object Constants {
     /*
     Products
      */
-    const val BASE_URL = "https://shams-pharmacis.products.aait-d.com/api/app/"
     const val HOME = "home"
     const val CATEGORIES = "categories"
     const val LAT = 31.022855
